@@ -1,3 +1,5 @@
+# This YAML file is auto-generated from a Transifex import.
+# Do not edit it by hand, your changes will be overwritten.
 --- 
 ar: 
   EditAppointmentGroupDetails: 
@@ -10638,7 +10640,7 @@ ar:
     canvadocs_settings: 
       description: "تتكامل هذه الأداة الإضافية مع Canvadocs (أو أي API متوافق مع Box View) لتوفير عارض مستندات HTML5 ."
       labels: 
-        api_key: "مفتاح واجهة API"
+        ***REMOVED***
         base_url: "عنوان URL الأساسي"
     crocodoc: 
       description: "تمكين Crocodoc كخيار في معاينة المستند"
@@ -10892,7 +10894,7 @@ ar:
           * بعد حفظ التطبيق، قم بتدوين ملاحظة عن مفتاح العميل والشفرة السرية للعميل
       domain_name: المجال
       labels: 
-        api_key: "مفتاح العميل"
+        ***REMOVED***
         secret_key: "كلمة سر العميل"
     webct_scraper_settings: 
       description: |-
