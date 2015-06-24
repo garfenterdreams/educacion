@@ -33,6 +33,7 @@ ar:
       other: "%{count} من الطلاب"
       two: "%{count} طالب"
       zero: "%{count} طالب"
+    student_count_max: "{count} / %{max}% من الطلاب"
     user_count: 
       few: "%{count} مستخدمين"
       many: "%{count} مستخدم"
@@ -40,6 +41,7 @@ ar:
       other: "%{count} من المستخدمين"
       two: "%{count} مستخدم"
       zero: "%{count} مستخدم"
+    user_count_max: "{count} / %{max}% من المستخدمين"
   GroupUserCollection: 
     flash: 
       userAlreadyInGroup: "تحذير: %{user} هو عضو بالفعل في %{group}"
@@ -67,7 +69,7 @@ ar:
       common_core_guid: "(مثال. %{guid})"
       description: "ستحتاج إلى الوصول إلى حساب  [Academic Benchmark](%{url})."
       labels: 
-        api_key: "مفتاح واجهة API"
+        ***REMOVED***
         api_url: "عنوان Url لواجهة Api"
         common_core_guid: "المعرف الأساسي المشترك GUID (اختياري)"
   account: 
@@ -5889,6 +5891,7 @@ ar:
         already_used: "تم تضمين هذا الإرسال بالفعل في المحفظة الخاصة بك"
         feed: "موجز Atom لـ Eportfolio"
         view_submission: "عرض الإرسال"
+      upload_limit: "تخصيص 50 ميجابايت لكل ملف"
       welcome: "إذا كانت هذه هي المرة الأولى لك هنا، فلعلك ترغب في انبثاق المعالج لمعرفة أفضل طريقة للبدء. وإلا فيمكنك إضافة الإرسالات الحديثة سريعًا أو الانتقال مباشرة للمحفظة."
       write_only_comments: "التعليقات الخاصة بهذه الصفحة خاصة. يمكنك إنشاء تعليقات، لكن سيكون مالك المحفظة فقط هو الشخص الوحيد الذي يمكنه عرضها."
     show_me: إظهار
@@ -10716,7 +10719,7 @@ ar:
     canvadocs_settings: 
       description: "تتكامل هذه الأداة الإضافية مع Canvadocs (أو أي API متوافق مع Box View) لتوفير عارض مستندات HTML5 ."
       labels: 
-        api_key: "مفتاح واجهة API"
+        ***REMOVED***
         base_url: "عنوان URL الأساسي"
     canvas_webhooks: 
       description: "مكون إضافي لصفحات Webhook خاص بـ Canvas"
@@ -10743,7 +10746,7 @@ ar:
           
           * بعد حفظ التطبيق، الرجاء تدوين مفتاح API
       labels: 
-        api_key: "مفتاح واجهة API"
+        ***REMOVED***
     dim_dim_settings: 
       description: "سيلزم الوصول إلى مثيل Dim Dim."
       labels: 
