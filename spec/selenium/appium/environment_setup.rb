@@ -12,11 +12,11 @@ module EnvironmentSetup
     if @appium_dev_key.nil?
       truncate_table(DeveloperKey) if @appium_dev_key.nil?
       @appium_dev_key = DeveloperKey.create!(
-        name: 'appium_developer_key',
-        tool_id: '68413514',
-        email: 'admin@instructure.com',
+        name: $appium_config[:mv_key_name],
+        tool_id: $appium_config[:mv_key_id],
+        email: $appium_config[:mv_key_email],
         redirect_uri: "http://#{host_url}",
-        ***REMOVED***
+        api_key: $appium_config[:mv_key]
       )
     end
     @appium_dev_key
