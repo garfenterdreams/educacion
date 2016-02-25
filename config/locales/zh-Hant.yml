@@ -4,6 +4,7 @@
 zh-Hant: 
   1_item_scores_5512cd03: "1- 項目分數"
   1st_reviewer_3c1d0119: 第1檢閲人
+  25th_75th_ile_406a67bf: 第25-75%i百分位數
   25th_75th_percentile_aa4c11f2: 第25-75百分位數
   2_final_score_7b0fd15e: "2- 最終分數"
   2nd_reviewer_94fdbcd: 第2檢閲人
@@ -10929,7 +10930,7 @@ zh-Hant:
     crocodoc_settings: 
       description: "此外掛程式與 Crocodoc 集成，以提供一個 HTML5 文件預覽程式，該程式使得教師和學生可以附註文件。"
       labels: 
-        api_key: "Crocodoc API 金鑰"
+        ***REMOVED***
     custom_ticketing_email_settings: 
       labels: 
         email_address: |-
@@ -11014,7 +11015,7 @@ zh-Hant:
     google_docs_settings: 
       description: "您將需要[在 Google 上註冊您的網域](%{google_url})。記下您的「OAuth 使用者金鑰」和「OAuth使用者金鑰」值。"
       labels: 
-        api_key: "OAuth 使用者金鑰"
+        ***REMOVED***
         secret_key: "OAuth 使用者密碼"
     google_drive: 
       description: "Google Drive 檔案共享"
