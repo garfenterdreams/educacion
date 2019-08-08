@@ -10,9 +10,6 @@ development:
     # service
     canvas:
       # environment
-      address-book:
-        app-host: "http://address-book.docker"
-        ***REMOVED***
       canvas:
         encryption-***REMOVED***
         signing-***REMOVED***
