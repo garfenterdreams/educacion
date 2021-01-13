@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# Copyright (C) 2015 - present Instructure, Inc.
+# Copyright (C) 2021 - present Instructure, Inc.
 #
 # This file is part of Canvas.
 #
@@ -21,17 +21,12 @@ require_relative 'common'
 
 module AcademicBenchmarks
   module Standards
-    class Authority
+    class Section
       include Common
-      def publication_cache
-        @publication_cache ||= {}
-      end
-
       def build_outcomes(ratings={}, _parent=nil)
-        publication_cache.clear
         build_common_outcomes(ratings).merge!({
           title: description,
-          description: "#{code} - #{description}",
+          description: description,
         })
       end
     end
