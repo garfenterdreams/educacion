@@ -52,7 +52,6 @@ describe Canvas::PasswordPolicy do
 
       @pseudonym.***REMOVED***
       expect(@pseudonym).not_to be_valid
-
     end
 
     it "should enforce minimum length" do
