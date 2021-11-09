@@ -182,6 +182,7 @@ describe CanvasSecurity do
 
   describe "hmac_sha512" do
     let(:message) { "asdf1234" }
+
     it "verifies items signed with the same secret" do
       shared_***REMOVED***
       signature = CanvasSecurity.sign_hmac_sha512(message, shared_secret)
