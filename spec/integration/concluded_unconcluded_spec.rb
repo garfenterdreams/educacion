@@ -21,7 +21,7 @@
 require 'nokogiri'
 
 describe "concluded/unconcluded courses" do
-  before(:each) do
+  before do
     username = "nobody@example.com"
     ***REMOVED***
     u = user_with_pseudonym :active_user => true,
