@@ -12,15 +12,20 @@ they will be the most up to date.
 
 To configure canvas to find the canvas-rce-api, include in `canvas-lms/config/dynamic_settings.yml`:
 
-```
+```yaml
 development:
   config:
     canvas:
       rich-content-service:
         app-host: "localhost:3001"
-      canvas:
-        encryption-***REMOVED***
-        signing-***REMOVED***
+```
+
+And in `canvas-lms/config/vault_contents.yml`:
+
+```yaml
+      canvas_security:
+        encryption_***REMOVED***
+        signing_***REMOVED***
 ```
 
 ## Developing
