@@ -93,7 +93,7 @@ describe UserService do
       @shard1.activate { user.save! }
       @shard2.activate do
         @registration = UserService.register(
-          user: user,
+          user:,
           token: "some token",
           ***REMOVED***,
           service_user_id: user.id,
