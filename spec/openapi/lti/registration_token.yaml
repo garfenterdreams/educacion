@@ -29,6 +29,6 @@ paths:
                 - oidc_configuration_url
                 - token
               example:
-                uuid: 0d3f7978-8635-44dd-aec1-8a63f7520c8f
-                oidc_configuration_url: https://canvas.instructure.com/api/lti/security/openid-configuration
+                uuid: a98d2e39-b22d-45f8-9479-ac1f7546363d
+                oidc_configuration_url: https://canvas.instructure.com/api/lti/security/openid-configuration?registration_token=***REMOVED***
                 token: ***REMOVED***
