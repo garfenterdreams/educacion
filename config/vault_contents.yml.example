@@ -27,6 +27,7 @@ development:
       canvas_security:
         encryption_***REMOVED***
         signing_***REMOVED***
+        attachments_***REMOVED***
       lti_platform_storage:
         signing_***REMOVED***
 #     pandata_creds:
