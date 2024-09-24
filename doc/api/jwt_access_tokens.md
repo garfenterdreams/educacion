@@ -37,13 +37,16 @@ Then, make a request to the authorization endpoint to retrieve your JWT access t
 The signed JWT should be used as the `assertion` parameter, the `grant_type` parameter should be set to `authorization_code`, and the `code` parameter should be set to the value of the `reg_key` received from the registration message sent by the tool consumer.
 
 **Example request:**
-```
+
+```bash
 curl https://<canvas>/api/lti/accounts/1/authorize \
        -F 'grant_type=authorization_code' \
        -F'assertion=***REMOVED***' \
        -F 'code=<reg_key>'
 ```
+
 **Example response:**
+
 ```json
 {
   "access_token":"***REMOVED***",
@@ -74,6 +77,7 @@ my_jwt = {
 ```
 
 Next, sign the JWT using the tool proxy shared secret and HS256:
+
 ```javascript
 signed_jwt = my_jwt.sign("tool-proxy-shared-secret").to_string
 > "***REMOVED***"
@@ -87,13 +91,15 @@ Next make a request to the authorization endpoint to retrieve your JWT access to
 This signed JWT should be used as the `assertion` parameter and the `grant_type` parameter  should be set to `urn:ietf:params:oauth:grant-type:jwt-bearer`
 
 **Example request:**
-```
+
+```bash
 curl https://<canvas>/api/lti/accounts/1/authorize \
        -F 'grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer' \
        -F 'assertion=<signed_jwt>'
 ```
 
-**Example response**
+**Example response:**
+
 ```json
 {
   "access_token":"***REMOVED***",
@@ -101,15 +107,18 @@ curl https://<canvas>/api/lti/accounts/1/authorize \
   "expires_in": "3600"
 }
 ```
+
 The access token in the response can then be used in an API request to Originality Report and Submission endpoints.
 
-**Example request**
-```
+**Example request:**
+
+```bash
 curl https://<canvas>/api/lti/assignments/25/submissions/6/originality_report/71 \
        -F 'Authorization=Bearer <access_token from the authorize endpoint response>'
 ```
 
-**Example response**
+**Example response:**
+
 ```json
 {
    "id": 4,
