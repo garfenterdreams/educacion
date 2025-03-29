@@ -29,6 +29,11 @@ development:
         signing_***REMOVED***
       lti_platform_storage:
         signing_***REMOVED***
+      cedar_client:
+        cedar_hostname: "http://cedar-api:3000"
+        cedar_audience: "cedar-local"
+        cedar_shared_secret: fake-secrete-key
+        cedar_consumer_name: "canvas"
 #     pandata_creds:
 #       canvas_key: 'INTERNAL_TEST'
 #       canvas_***REMOVED***
