@@ -76,3 +76,12 @@ RUN unset RUBY && bundle config --global build.nokogiri --use-system-libraries &
 RUN yarn install --frozen-lockfile || yarn install --frozen-lockfile --network-concurrency 1 && \
   bin/rails canvas:compile_assets --trace && \
   rm -rf node_modules
+
+# Garfenter: Add entrypoint for auto-initialization
+USER root
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+USER docker
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["/tini", "--", "/usr/src/entrypoint"]
