@@ -51,7 +51,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: ./Dockerfile.production
           push: true
           tags: |
             ${{ steps.tags.outputs.full_image }}
