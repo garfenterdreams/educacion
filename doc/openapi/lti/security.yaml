@@ -68,7 +68,7 @@ paths:
         required: false
         schema:
           type: string
-        example: ***REMOVED***
+        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb290X2FjY291bnRfZ2xvYmFsX2lkIjo4MTI0LCJleHAiOjE3MDI2MTkwMTd9.r67qwILzqa5w14gpAbwZOopmt7ZZuPoJrcVE1vgphp8
       responses:
         '200':
           description: contains the correct information

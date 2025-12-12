@@ -365,7 +365,7 @@ module CanvasSecurity
           user_id = 84
           base64_encoded_wrapper_new_key = build_wrapped_token(user_id, encoding_secret: fake_signing_secret)
           base64_encoded_wrapper_old_key = build_wrapped_token(user_id, encoding_secret: fake_signing_secret_deprecated)
-          base64_encoded_wrapper_non_key = build_wrapped_token(user_id, encoding_***REMOVED***)
+          base64_encoded_wrapper_non_key = build_wrapped_token(user_id, encoding_secret: "aint-a-used-secret-but-ok-length")
           jwt_new_key = ServicesJwt.new(base64_encoded_wrapper_new_key)
           jwt_old_key = ServicesJwt.new(base64_encoded_wrapper_old_key)
           jwt_non_key = ServicesJwt.new(base64_encoded_wrapper_non_key)

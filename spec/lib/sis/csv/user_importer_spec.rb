@@ -433,7 +433,7 @@ describe SIS::CSV::UserImporter do
     p = user1.pseudonyms.first
     expect(p.valid_arbitrary_credentials?("badpassword")).to be_truthy
 
-    p.***REMOVED***
+    p.password = "lessbadpassword"
     p.password_confirmation = "lessbadpassword"
     p.save
 
@@ -441,7 +441,7 @@ describe SIS::CSV::UserImporter do
     p = user2.pseudonyms.first
     expect(p.valid_arbitrary_credentials?("password")).to be_truthy
 
-    p.***REMOVED***
+    p.password = "newpassword"
     p.password_confirmation = "newpassword"
     p.save
 
@@ -575,7 +575,7 @@ describe SIS::CSV::UserImporter do
       expect(p.valid_arbitrary_credentials?("password3")).to be_falsey
       expect(p.valid_arbitrary_credentials?("password4")).to be_falsey
 
-      p.password_confirmation = p.***REMOVED***
+      p.password_confirmation = p.password = "password4"
       p.save
       user1_persistence_token = p.persistence_token
     end
@@ -587,7 +587,7 @@ describe SIS::CSV::UserImporter do
       expect(p.valid_arbitrary_credentials?("encpass3")).to be_falsey
       expect(p.valid_arbitrary_credentials?("password4")).to be_falsey
 
-      p.password_confirmation = p.***REMOVED***
+      p.password_confirmation = p.password = "password4"
       p.save
       user2_persistence_token = p.persistence_token
     end
@@ -1163,7 +1163,7 @@ describe SIS::CSV::UserImporter do
     u = User.create!
     u.register!
     p_count = Pseudonym.count
-    p = u.pseudonyms.create!(unique_id: "user2", ***REMOVED***, password_confirmation: "validpassword", account: @account)
+    p = u.pseudonyms.create!(unique_id: "user2", password: "validpassword", password_confirmation: "validpassword", account: @account)
     expect(Pseudonym.by_unique_id("user1").first).to be_nil
     expect(Pseudonym.by_unique_id("user2").first).not_to be_nil
     expect(p.sis_user_id).to be_nil

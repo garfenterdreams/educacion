@@ -44,7 +44,7 @@ RSpec.describe YoutubeMigrationService do
         domain: "arc.instructure.com",
         url: "https://arc.instructure.com",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         name: "Studio"
       }
     )
@@ -2241,7 +2241,7 @@ RSpec.describe YoutubeMigrationService do
             domain: "arc.instructure.com",
             url: "https://arc.instructure.com",
             consumer_key: "mid_account_tool_key",
-            shared_***REMOVED***,
+            shared_secret: "mid_account_tool_secret",
             name: "mid_account_tool studio"
           }
         )
@@ -2261,7 +2261,7 @@ RSpec.describe YoutubeMigrationService do
             domain: "arc.instructure.com",
             url: "https://arc.instructure.com",
             consumer_key: "root_account_tool_key",
-            shared_***REMOVED***,
+            shared_secret: "root_account_tool_secret",
             name: "root_account_tool studio"
           }
         )

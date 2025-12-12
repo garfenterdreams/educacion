@@ -30,7 +30,7 @@ PactConfig::Consumers::ALL.each do |consumer|
     provider_state "a teacher not in a course" do
       set_up do
         @teacher = user_factory(active_all: true, name: "Teacher2")
-        @teacher.pseudonyms.create!(unique_id: "Teacher2@instructure.com", ***REMOVED***, password_confirmation: "password")
+        @teacher.pseudonyms.create!(unique_id: "Teacher2@instructure.com", password: "password", password_confirmation: "password")
       end
     end
 

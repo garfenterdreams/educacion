@@ -27,7 +27,7 @@ Next, sign the JWT using the developer key associated with the global ID used as
 
 ```javascript
 signed_jwt = my_jwt.sign(<my_dev_key_secret>).to_string
-> "***REMOVED***"
+> "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwMDAwMDAwMDAwMDAzLCJhdWQiOiJodHRwOi8vbXkuY2FudmFzLmNvbS9hcGkvbHRpL2FjY291bnRzLzEvYXV0aG9yaXplIiwiZXhwIjoxNDg2MzkzODY4LCJJYXQiOjE0ODYzOTM4MDAsImp0aSI6IjY4ODcwMGMyLTRiYzEtNDBiNy04M2U1LTdjYmY1NGY5MzMzNSJ9.L0QxWtUIzEE8rpVHhPn5-K3MmadW46pMrnPPZ7CSJwg"
 ```
 
 We highly recommend using a library to create and sign these tokens.
@@ -41,7 +41,7 @@ The signed JWT should be used as the `assertion` parameter, the `grant_type` par
 ```bash
 curl https://<canvas>/api/lti/accounts/1/authorize \
        -F 'grant_type=authorization_code' \
-       -F'assertion=***REMOVED***' \
+       -F'assertion=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDAwMDAwMDAwMDAwMyIsImF1ZCI6Imh0dHA6Ly9jYW52YXMuZG9ja2VyL2FwaS9sdGkvYXV0aG9yaXplIiwiZXhwIjoxNDg5Njc0NTAyLCJpYXQiOjE0ODk2NzQ0NDIsImp0aSI6ImQ4MjA0NDBjLTI3YzMtNDg2YS1hZjM5LWQzZDQxOGI4ZDNkYSJ9.S3SxxsSKAKhT8ViHuCDBxp9fbzdYGKJEBftftJMX4-E' \
        -F 'code=<reg_key>'
 ```
 
@@ -49,7 +49,7 @@ curl https://<canvas>/api/lti/accounts/1/authorize \
 
 ```json
 {
-  "access_token":"***REMOVED***",
+  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDYW52YXMiLCJzdWIiOjEwMDAwMDAwMDAwMDAzLCJleHAiOjE0ODk2Nzc5NzcsImF1ZCI6ImNhbnZhcy5kb2NrZXIiLCJpYXQiOjE0ODk2NzQzNzcsIm5iZiI6MTQ4OTY3NDM0NywianRpIjoiMjI0OTQyNjAtMGE5Ni00NjhlLWFjZGYtMmIzOWYwNjI5NmE1IiwicmVnX2tleSI6IjkzNTllMGNkLTZhNjktNGNhOS05MWI2LTE2MmNmMDcxMWE1YiJ9.7nQ1g0-FpIMWn5kTWcf0M0D2zqENs_my-3iLuHUr5k0",
   "token_type": "bearer",
   "expires_in": "3600"
 }
@@ -80,7 +80,7 @@ Next, sign the JWT using the tool proxy shared secret and HS256:
 
 ```javascript
 signed_jwt = my_jwt.sign("tool-proxy-shared-secret").to_string
-> "***REMOVED***"
+> "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMxMjMtYWQxMy1hYzIzMyIsImF1ZCI6Imh0dHBzOi8vbXkuY2FudmFzLWRvbWFpbi5jb20vYXBpL2x0aS9hY2NvdW50cy8xL2F1dGhvcml6ZSIsImV4cCI6MTQ4NjM5Mzg2OCwiaWF0IjoxNDg2MzkzODAwLCJqdGkiOiI2ODg3MDBjMi00YmMxLTQwYjctODNlNS03Y2JmNTRmOTMzMDUifQ.IJ4ROoH8GxwWr_a-YNSvWGd3NeYLg0q9fOZCCLUaa4Q"
 ```
 
 We highly recommend using a library to create and sign these tokens.
@@ -102,7 +102,7 @@ curl https://<canvas>/api/lti/accounts/1/authorize \
 
 ```json
 {
-  "access_token":"***REMOVED***",
+  "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDYW52YXMiLCJzdWIiOiIxMjMxMjMtYWQxMy1hYzIzMyIsImV4cCI6MTQ4NjM5ODQwMiwiYXVkIjoibXkuY2FudmFzLWRvbWFpbi5jb20iLCJpYXQiOjE0ODYzOTQ4MDIsIm5iZiI6MTQ4NjM5NDc3MiwianRpIjoiYTMwMGFmMWMtOTliOS00MDk4LThhZTQtNzE5MDlhNDVkZjYyIn0.qcpgVNVcThwwMMWVarflUPYbyIH70-yvClbPkjbAADs",
   "token_type": "bearer",
   "expires_in": "3600"
 }

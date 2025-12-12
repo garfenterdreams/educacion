@@ -69,7 +69,7 @@ describe Lti::IMS::NamesAndRolesSerializer do
     user.pseudonyms.create!({
                               account: course.account,
                               unique_id: "user1@example.com",
-                              ***REMOVED***,
+                              password: "asdfasdf",
                               password_confirmation: "asdfasdf",
                               workflow_state: "active",
                               sis_user_id: "user-1-sis-user-id-1"

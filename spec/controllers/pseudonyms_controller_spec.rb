@@ -28,7 +28,7 @@ describe PseudonymsController do
       it "changes the password if authorized" do
         pword = @pseudonym.crypted_password
         code = @cc.confirmation_code
-        post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { ***REMOVED***, password_confirmation: "12341234" } }
+        post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { password: "12341234", password_confirmation: "12341234" } }
         expect(response).to be_successful
         expect(assigns[:pseudonym]).to eql(@pseudonym)
         @pseudonym.reload
@@ -48,7 +48,7 @@ describe PseudonymsController do
         expect(@cc.confirmation_code_expires_at).to be_nil
         pword = @pseudonym.crypted_password
         code = @cc.confirmation_code
-        post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { ***REMOVED***, password_confirmation: "12341234" } }
+        post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { password: "12341234", password_confirmation: "12341234" } }
         expect(response).to be_successful
         expect(assigns[:pseudonym]).to eql(@pseudonym)
         @pseudonym.reload
@@ -63,7 +63,7 @@ describe PseudonymsController do
     it "does not change the password if unauthorized" do
       pword = @pseudonym.crypted_password
       code = @cc.confirmation_code
-      post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code + "a", pseudonym: { ***REMOVED***, password_confirmation: "12341234" } }
+      post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code + "a", pseudonym: { password: "12341234", password_confirmation: "12341234" } }
       assert_status(400)
       expect(assigns[:pseudonym]).to eql(@pseudonym)
       expect(assigns[:pseudonym].crypted_password).to eql(pword)
@@ -77,14 +77,14 @@ describe PseudonymsController do
       Setting.set("password_reset_token_expiration_minutes", "60")
       @cc.forgot_password!
       expect(@cc.confirmation_code_expires_at).to be_between(118.minutes.from_now, 122.minutes.from_now)
-      post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { ***REMOVED***, password_confirmation: "12341234" } }
+      post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { password: "12341234", password_confirmation: "12341234" } }
       expect(response).to be_successful
     end
 
     it "rejects an expired password-change token" do
       @cc.forgot_password!
       @cc.update confirmation_code_expires_at: 1.hour.ago
-      post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { ***REMOVED***, password_confirmation: "12341234" } }
+      post "change_password", params: { pseudonym_id: @pseudonym.id, nonce: @cc.confirmation_code, pseudonym: { password: "12341234", password_confirmation: "12341234" } }
       assert_status(400)
     end
 
@@ -206,7 +206,7 @@ describe PseudonymsController do
 
     it "destroys if for the current user with more than one pseudonym" do
       account_admin_user(user: @user)
-      @p2 = @user.pseudonyms.create!(unique_id: "another_one@test.com", ***REMOVED***, password_confirmation: "password")
+      @p2 = @user.pseudonyms.create!(unique_id: "another_one@test.com", password: "password", password_confirmation: "password")
       delete "destroy", params: { user_id: @user.id, id: @p2.id }
       assert_status(200)
       expect(@pseudonym).to be_active
@@ -215,7 +215,7 @@ describe PseudonymsController do
 
     it "destroys if authorized to delete pseudonyms" do
       Account.site_admin.account_users.create!(user: @user)
-      @p2 = @user.pseudonyms.build(unique_id: "another_one@test.com", ***REMOVED***, password_confirmation: "password")
+      @p2 = @user.pseudonyms.build(unique_id: "another_one@test.com", password: "password", password_confirmation: "password")
       @p2.sis_user_id = "another_one@test.com"
       @p2.save!
       @p2.account.authentication_providers.create!(auth_type: "ldap")
@@ -341,13 +341,13 @@ describe PseudonymsController do
       account = Account.default
       user_with_pseudonym(
         username: "test2@example.com",
-        ***REMOVED***,
+        password: "old_password",
         account:
       )
       @test_user = @user
       user_with_pseudonym(
         username: "admin@example.com",
-        ***REMOVED***,
+        password: "admin-password",
         account:
       )
       account.settings[:admins_can_change_passwords] = true
@@ -358,7 +358,7 @@ describe PseudonymsController do
         id: @test_user.pseudonym.id,
         user_id: @test_user.id,
         pseudonym: {
-          ***REMOVED***,
+          password: "new_password",
           password_confirmation: "new_password"
         }
       }
@@ -371,18 +371,18 @@ describe PseudonymsController do
       account1 = Account.new
       account1.settings[:admins_can_change_passwords] = true
       account1.save!
-      user_with_pseudonym(active_all: 1, username: "user@example.com", ***REMOVED***, account: account1)
+      user_with_pseudonym(active_all: 1, username: "user@example.com", password: "qwertyuiop", account: account1)
       @user1 = @user
       @pseudonym1 = @pseudonym
       # need to get the user associated with the default account as well
       @user.pseudonyms.create!(unique_id: "user1@example.com", account: Account.default)
 
-      user_with_pseudonym(active_all: 1, username: "user2@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: 1, username: "user2@example.com", password: "qwertyuiop")
       Account.default.account_users.create!(user: @user)
       user_session(@user, @pseudonym)
       # not logged in!
 
-      post "update", params: { id: @pseudonym1.id, user_id: @user1.id, pseudonym: { ***REMOVED***, password_confirmation: "bobbobbob" } }, format: "json"
+      post "update", params: { id: @pseudonym1.id, user_id: @user1.id, pseudonym: { password: "bobbobbob", password_confirmation: "bobbobbob" } }, format: "json"
       expect(response).not_to be_successful
       @pseudonym1.reload
       expect(@pseudonym1.valid_password?("qwertyuiop")).to be_truthy
@@ -393,12 +393,12 @@ describe PseudonymsController do
       account1 = Account.new
       account1.settings[:admins_can_change_passwords] = false
       account1.save!
-      user_with_pseudonym(active_all: 1, username: "user@example.com", ***REMOVED***, account: account1)
+      user_with_pseudonym(active_all: 1, username: "user@example.com", password: "qwertyuiop", account: account1)
       @user1 = @user
       @pseudonym1 = @pseudonym
 
       role = custom_account_role("sis_only", account: account1)
-      user_with_pseudonym(active_all: 1, username: "user2@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: 1, username: "user2@example.com", password: "qwertyuiop")
       account_admin_user_with_role_changes(user: @user, account: account1, role:, role_changes: { manage_sis: true, manage_user_logins: true })
       user_session(@user, @pseudonym)
 
@@ -448,13 +448,13 @@ describe PseudonymsController do
     end
 
     it "fails partial update when permission isn't given to make username change" do
-      bob = user_with_pseudonym(username: "old_username", ***REMOVED***)
+      bob = user_with_pseudonym(username: "old_username", password: "old_password")
       user_session(bob)
       put "update",
           params: { id: bob.pseudonym.id,
                     user_id: bob.id,
                     pseudonym: {
-                      ***REMOVED***,
+                      password: "new_password",
                       password_confirmation: "new_password",
                       unique_id: "new_username"
                     } }
@@ -465,13 +465,13 @@ describe PseudonymsController do
     end
 
     it "allows password change for current user" do
-      bob = user_with_pseudonym(username: "old_username", ***REMOVED***)
+      bob = user_with_pseudonym(username: "old_username", password: "old_password")
       user_session(bob)
       put "update",
           params: { id: bob.pseudonym.id,
                     user_id: bob.id,
                     pseudonym: {
-                      ***REMOVED***,
+                      password: "new_password",
                       password_confirmation: "new_password",
                     } }
       expect(response).to be_redirect
@@ -481,16 +481,16 @@ describe PseudonymsController do
     end
 
     it "returns an error message when trying to duplicate a sis id" do
-      user_with_pseudonym(active_all: 1, username: "user@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: 1, username: "user@example.com", password: "qwertyuiop")
       @user1 = @user
       @pseudonym1 = @pseudonym
       @pseudonym1.update_attribute(:sis_user_id, "sis_user")
 
-      user_with_pseudonym(active_all: 1, username: "user2@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: 1, username: "user2@example.com", password: "qwertyuiop")
       @user2 = @user
       @pseudonym2 = @pseudonym
 
-      user_with_pseudonym(active_all: 1, username: "admin@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: 1, username: "admin@example.com", password: "qwertyuiop")
       account_admin_user(user: @user)
       user_session(@user, @pseudonym)
 
@@ -534,7 +534,7 @@ describe PseudonymsController do
 
     describe "create" do
       it "creates a new pseudonym for a user in a different shard (cross-shard)" do
-        post "create", params: { user_id: @user.id, pseudonym: { ***REMOVED***, password_confirmation: "bobobobo", account_id: Account.default.id, unique_id: "bobob" } }, format: "json"
+        post "create", params: { user_id: @user.id, pseudonym: { password: "bobobobo", password_confirmation: "bobobobo", account_id: Account.default.id, unique_id: "bobob" } }, format: "json"
         expect(response).to be_successful
 
         @user.reload
@@ -543,7 +543,7 @@ describe PseudonymsController do
       end
 
       it "creates a new pseudonym for a user in a different shard (same-shard)" do
-        post "create", params: { user_id: @user.id, pseudonym: { ***REMOVED***, password_confirmation: "bobobobo", account_id: @account.id, unique_id: "bobob" } }, format: "json"
+        post "create", params: { user_id: @user.id, pseudonym: { password: "bobobobo", password_confirmation: "bobobobo", account_id: @account.id, unique_id: "bobob" } }, format: "json"
         expect(response).to be_successful
 
         expect(@user.all_pseudonyms.length).to eq 2

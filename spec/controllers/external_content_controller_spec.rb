@@ -528,7 +528,7 @@ describe ExternalContentController do
         context "when the issuer secret yields the wrong signature" do
           before do
             oembed_token
-            tool.update!(shared_***REMOVED***)
+            tool.update!(shared_secret: "super secret")
           end
 
           it { is_expected.to be_unauthorized }

@@ -70,7 +70,7 @@ RSpec.describe ApplicationController do
 
         mock_user_services = double("mock_user_services")
         expect(mock_current_user).to receive(:user_services).and_return(mock_user_services)
-        expect(mock_user_services).to receive(:where).with(service: "google_drive").and_return(double(first: double(token: "user_service_token", ***REMOVED***)))
+        expect(mock_user_services).to receive(:where).with(service: "google_drive").and_return(double(first: double(token: "user_service_token", secret: "user_service_secret")))
 
         expect(GoogleDrive::Connection).to receive(:new).with("user_service_token", "user_service_secret", 30)
         controller.send(:google_drive_connection)
@@ -1040,7 +1040,7 @@ RSpec.describe ApplicationController do
             created_at = Time.zone.now
             expected_interaction_token = "#{request_id}|#{created_at.iso8601(2)}|#{interaction_seconds}"
             controller.response = double("response", headers: {})
-            controller.params[:page_view_token] = "***REMOVED***"
+            controller.params[:page_view_token] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpIjoiMzE4NzdmMWMtN2JmYy00Mzg5LThkYWEtM2FkYjQ4ZDk4ODI5IiwidSI6bnVsbCwiYyI6bnVsbH0.IltPMbU08FUf-Kr_5vYzie4HnSW2tW8qFfYJunR9Z4o"
             controller.params[:interaction_seconds] = interaction_seconds
             allow(controller.request).to receive_messages(xhr?: 0, put?: true)
             allow(controller.response).to receive(:headers).and_return({})

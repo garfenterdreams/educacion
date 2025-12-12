@@ -21,7 +21,7 @@ describe "site-wide" do
   context "web app manifest" do
     before(:once) do
       student_in_course
-      user_with_pseudonym(user: @student, username: "student@example.com", ***REMOVED***)
+      user_with_pseudonym(user: @student, username: "student@example.com", password: "password")
     end
 
     it "doesn't add link tag if setting is explicitly unset" do

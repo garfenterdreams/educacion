@@ -30,7 +30,7 @@ describe('usePasswordValidator', () => {
   it('should return null when password meets all policy requirements', () => {
     const {result} = renderHook(() => usePasswordValidator(policy))
     const validatePassword = result.current
-    const ***REMOVED***
+    const password = 'Valid123!'
     const validationError = validatePassword(password)
     expect(validationError).toBeNull()
   })
@@ -46,7 +46,7 @@ describe('usePasswordValidator', () => {
   it('should return an error when password does not include a numeric character', () => {
     const {result} = renderHook(() => usePasswordValidator(policy))
     const validatePassword = result.current
-    const ***REMOVED***
+    const password = 'NoNumber!'
     const validationError = validatePassword(password)
     expect(validationError).toBe('no_digits')
   })
@@ -54,7 +54,7 @@ describe('usePasswordValidator', () => {
   it('should return an error when password does not include a special character', () => {
     const {result} = renderHook(() => usePasswordValidator(policy))
     const validatePassword = result.current
-    const ***REMOVED***
+    const password = 'NoSpecial123'
     const validationError = validatePassword(password)
     expect(validationError).toBe('no_symbols')
   })
@@ -67,7 +67,7 @@ describe('usePasswordValidator', () => {
     }
     const {result} = renderHook(() => usePasswordValidator(updatedPolicy))
     const validatePassword = result.current
-    const ***REMOVED***
+    const password = 'OnlyLength'
     const validationError = validatePassword(password)
     expect(validationError).toBeNull()
   })
@@ -79,7 +79,7 @@ describe('usePasswordValidator', () => {
     }
     const {result} = renderHook(() => usePasswordValidator(updatedPolicy))
     const validatePassword = result.current
-    const ***REMOVED***
+    const password = 'NoNumber!'
     const validationError = validatePassword(password)
     expect(validationError).toBeNull()
   })
@@ -91,7 +91,7 @@ describe('usePasswordValidator', () => {
     }
     const {result} = renderHook(() => usePasswordValidator(updatedPolicy))
     const validatePassword = result.current
-    const ***REMOVED***
+    const password = 'NoSymbol123'
     const validationError = validatePassword(password)
     expect(validationError).toBeNull()
   })
@@ -106,7 +106,7 @@ describe('usePasswordValidator', () => {
   it('should return null if no password policy is provided', () => {
     const {result} = renderHook(() => usePasswordValidator())
     const validatePassword = result.current
-    const ***REMOVED***
+    const password = 'AnyPassword123!'
     const validationError = validatePassword(password)
     expect(validationError).toBeNull()
   })

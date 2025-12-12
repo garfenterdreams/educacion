@@ -34,7 +34,7 @@ describe "new login OTP page" do
     user = user_with_pseudonym(
       active_user: true,
       username: "tuwmfac",
-      ***REMOVED***
+      password: "CfWtyAWtwfQtHeGRTx9BnaU4N"
     )
     user.update!(
       otp_secret_key: ROTP::Base32.random,
@@ -52,7 +52,7 @@ describe "new login OTP page" do
     user = user_with_pseudonym(
       active_user: true,
       username: "tuwmfac",
-      ***REMOVED***
+      password: "CfWtyAWtwfQtHeGRTx9BnaU4N"
     )
     user.update!(
       otp_secret_key: ROTP::Base32.random,
@@ -74,7 +74,7 @@ describe "new login OTP page" do
     user = user_with_pseudonym(
       active_user: true,
       username: "tuwmfac",
-      ***REMOVED***
+      password: "CfWtyAWtwfQtHeGRTx9BnaU4N"
     )
     user.update!(
       otp_secret_key: ROTP::Base32.random,
@@ -97,7 +97,7 @@ describe "new login OTP page" do
     user = user_with_pseudonym(
       active_user: true,
       username: "tuwmfac",
-      ***REMOVED***
+      password: "CfWtyAWtwfQtHeGRTx9BnaU4N"
     )
     user.update!(
       otp_secret_key: ROTP::Base32.random,

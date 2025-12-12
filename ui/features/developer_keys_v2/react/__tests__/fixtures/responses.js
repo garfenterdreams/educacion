@@ -445,7 +445,7 @@ const successfulLtiKeySaveResponse = {
       created_at: '2022-11-29T16:02:00-07:00',
       user_id: null,
       client_credentials_audience: null,
-      ***REMOVED***,
+      api_key: 'jaMrn1q7X6FDMM3xIowRFqKHLHWC55FKl07hsWoa96IC6Xtb3obpvkFJW14ifT1l',
       redirect_uri: null,
       redirect_uris: 'http://lti13testtool.docker/launch',
       access_token_count: 0,

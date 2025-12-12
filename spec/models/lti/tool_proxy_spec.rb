@@ -32,7 +32,7 @@ module Lti
 
     describe "validations" do
       before do
-        subject.shared_***REMOVED***
+        subject.shared_secret = "shared_secret"
         subject.guid = "guid"
         subject.product_version = "1.0beta"
         subject.lti_version = "LTI-2p0"
@@ -344,7 +344,7 @@ module Lti
 
     def create_tool_proxy(opts = {})
       default_opts = {
-        shared_***REMOVED***,
+        shared_secret: "shared_secret",
         guid: SecureRandom.uuid,
         product_version: "1.0beta",
         lti_version: "LTI-2p0",
@@ -371,7 +371,7 @@ module Lti
     context "singleton message handlers" do
       subject do
         described_class.create!(
-          shared_***REMOVED***,
+          shared_secret: "shared_secret",
           guid: "guid",
           product_version: "1.0beta",
           lti_version: "LTI-2p0",
@@ -714,7 +714,7 @@ module Lti
           },
           subscription_id: "id",
           context: course_factory(account:),
-          shared_***REMOVED***,
+          shared_secret: "shared_secret",
           guid: "guid",
           product_version: "1.0beta",
           lti_version: "LTI-2p0",

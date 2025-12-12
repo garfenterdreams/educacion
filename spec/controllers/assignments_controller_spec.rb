@@ -144,7 +144,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -161,7 +161,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -179,7 +179,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://void.url.inseng.net"
       )
@@ -202,7 +202,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -215,7 +215,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -229,7 +229,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -243,7 +243,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -261,7 +261,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -1402,7 +1402,7 @@ describe AssignmentsController do
     it "requires login for external tools in a public course" do
       @course.update_attribute(:is_public, true)
       @course.context_external_tools.create!(
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         consumer_key: "test_key",
         name: "test tool",
         domain: "example.com"
@@ -1417,7 +1417,7 @@ describe AssignmentsController do
 
     it "sets 'ROOT_OUTCOME_GROUP' for external tool assignments in the teacher view" do
       @course.context_external_tools.create!(
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         consumer_key: "test_key",
         name: "test tool",
         domain: "example.com",
@@ -1490,7 +1490,7 @@ describe AssignmentsController do
       it "logs an AUA as an assignment view for an external tool assignment" do
         user_session(@student)
         @course.context_external_tools.create!(
-          shared_***REMOVED***,
+          shared_secret: "test_secret",
           consumer_key: "test_key",
           name: "test tool",
           domain: "example.com"
@@ -1550,7 +1550,7 @@ describe AssignmentsController do
 
             it "is included when assignment is an external tool type" do
               @course.context_external_tools.create!(
-                shared_***REMOVED***,
+                shared_secret: "test_secret",
                 consumer_key: "test_key",
                 name: "test tool",
                 domain: "example.com"
@@ -1639,7 +1639,7 @@ describe AssignmentsController do
 
           it "includes group_categories when assignment is an external tool type" do
             @course.context_external_tools.create!(
-              shared_***REMOVED***,
+              shared_secret: "test_secret",
               consumer_key: "test_key",
               name: "test tool",
               domain: "example.com"
@@ -1653,7 +1653,7 @@ describe AssignmentsController do
 
           it "includes selected_student_group_id when assignment is an external tool type" do
             @course.context_external_tools.create!(
-              shared_***REMOVED***,
+              shared_secret: "test_secret",
               consumer_key: "test_key",
               name: "test tool",
               domain: "example.com"
@@ -1747,7 +1747,7 @@ describe AssignmentsController do
 
         it "includes speed_grader_url when assignment is an external tool type" do
           @course.context_external_tools.create!(
-            shared_***REMOVED***,
+            shared_secret: "test_secret",
             consumer_key: "test_key",
             name: "test tool",
             domain: "example.com"
@@ -1990,7 +1990,7 @@ describe AssignmentsController do
 
         it "sets assigned_rubric and rubric_association for external_tool assignments" do
           @course.context_external_tools.create!(
-            shared_***REMOVED***,
+            shared_secret: "test_secret",
             consumer_key: "test_key",
             name: "test tool",
             domain: "example.com"
@@ -2423,7 +2423,7 @@ describe AssignmentsController do
         tool = @course.context_external_tools.create!(
           name: "Quizzes.Next",
           consumer_key: "test_key",
-          shared_***REMOVED***,
+          shared_secret: "test_secret",
           tool_id: "Quizzes 2",
           url: "http://example.com/launch"
         )
@@ -2451,7 +2451,7 @@ describe AssignmentsController do
         @course.context_external_tools.create!(
           name: "Quizzes.Next",
           consumer_key: "test_key",
-          shared_***REMOVED***,
+          shared_secret: "test_secret",
           tool_id: "Quizzes 2",
           url: "http://example.com/launch"
         )
@@ -2616,7 +2616,7 @@ describe AssignmentsController do
         @course.context_external_tools.create!(
           name: "Quizzes.Next",
           consumer_key: "test_key",
-          shared_***REMOVED***,
+          shared_secret: "test_secret",
           tool_id: "Quizzes 2",
           url: "http://example.com/launch"
         )
@@ -2686,7 +2686,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -2702,7 +2702,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -2718,7 +2718,7 @@ describe AssignmentsController do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )

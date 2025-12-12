@@ -297,7 +297,7 @@ describe "courses" do
 
     before do
       course_with_teacher(active_all: true, name: "discussion course")
-      @student = user_with_pseudonym(active_user: true, username: "student@example.com", name: "student@example.com", ***REMOVED***)
+      @student = user_with_pseudonym(active_user: true, username: "student@example.com", name: "student@example.com", password: "asdfasdf")
       Account.default.settings[:allow_invitation_previews] = true
       Account.default.save!
     end

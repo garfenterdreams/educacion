@@ -962,7 +962,7 @@ describe DiscussionEntry do
     end
 
     it "raises InvalidParticipant for invalid participants" do
-      u = user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+      u = user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
       expect { @topic.reply_from(user: u, text: "entry 1") }.to raise_error IncomingMail::Errors::InvalidParticipant
     end
   end

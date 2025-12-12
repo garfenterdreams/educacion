@@ -27,7 +27,7 @@ describe "External Tools" do
       allow(BasicLTI::Sourcedid).to receive(:signing_secret) { "signing-secret-vp04BNqApwdwUYPUI" }
       course_factory(active_all: true)
       assignment_model(course: @course, submission_types: "external_tool", points_possible: 25)
-      @tool = @course.context_external_tools.create!(shared_***REMOVED***, consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com")
+      @tool = @course.context_external_tools.create!(shared_secret: "test_secret", consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com")
       @tag = @assignment.build_external_tool_tag(url: "http://example.com/one")
       @tag.content_type = "ContextExternalTool"
       @tag.save!
@@ -124,7 +124,7 @@ describe "External Tools" do
     end
 
     it "renders user navigation tools with a full return url" do
-      tool = @course.root_account.context_external_tools.build(shared_***REMOVED***, consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com", privacy_level: "public")
+      tool = @course.root_account.context_external_tools.build(shared_secret: "test_secret", consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com", privacy_level: "public")
       tool.user_navigation = { url: "http://www.example.com", text: "Example URL" }
       tool.save!
 
@@ -141,7 +141,7 @@ describe "External Tools" do
   it "highlights the navigation tab when using an external tool" do
     course_with_teacher_logged_in(active_all: true)
 
-    @tool = @course.context_external_tools.create!(shared_***REMOVED***, consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com")
+    @tool = @course.context_external_tools.create!(shared_secret: "test_secret", consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com")
     @tool.course_navigation = { url: "http://www.example.com", text: "Example URL" }
     @tool.save!
 
@@ -156,7 +156,7 @@ describe "External Tools" do
   it "prevents access for unverified users if account requires it" do
     course_with_teacher_logged_in(active_all: true)
 
-    @tool = @course.context_external_tools.create!(shared_***REMOVED***, consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com")
+    @tool = @course.context_external_tools.create!(shared_secret: "test_secret", consumer_key: "test_key", name: "my grade passback test tool", domain: "example.com")
     @tool.course_navigation = { url: "http://www.example.com", text: "Example URL" }
     @tool.save!
 

@@ -3398,7 +3398,7 @@ describe MasterCourses::MasterMigration do
 
       tool = @copy_to.context_external_tools.create!(name: "some tool",
                                                      consumer_key: "test_key",
-                                                     shared_***REMOVED***,
+                                                     shared_secret: "test_secret",
                                                      url: "http://example.com/launch")
       a_to.update(submission_types: "external_tool", external_tool_tag_attributes: { content: tool })
       tag = a_to.external_tool_tag

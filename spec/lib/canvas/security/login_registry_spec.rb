@@ -25,7 +25,7 @@ describe Canvas::Security::LoginRegistry do
     skip("requires redis config to run") unless Canvas.redis_enabled?
     u = user_with_pseudonym active_user: true,
                             username: "nobody@example.com",
-                            ***REMOVED***
+                            password: "asdfasdf"
     u.save!
     @p = u.pseudonym
   end

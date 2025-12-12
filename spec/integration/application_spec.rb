@@ -113,11 +113,11 @@ describe "site-wide" do
       course_with_teacher
 
       student_in_course
-      user_with_pseudonym user: @student, username: "student@example.com", ***REMOVED***
+      user_with_pseudonym user: @student, username: "student@example.com", password: "password"
       @student_pseudonym = @pseudonym
 
       account_admin_user account: Account.site_admin
-      user_with_pseudonym user: @admin, username: "admin@example.com", ***REMOVED***
+      user_with_pseudonym user: @admin, username: "admin@example.com", password: "password"
     end
 
     it "does not set the logged in user headers when no one is logged in" do
@@ -210,10 +210,10 @@ describe "site-wide" do
       enable_forgery_protection do
         course_with_teacher
         student_in_course
-        user_with_pseudonym(user: @student, username: "student@example.com", ***REMOVED***)
+        user_with_pseudonym(user: @student, username: "student@example.com", password: "password")
 
         account_admin_user(account: Account.site_admin)
-        user_with_pseudonym(user: @admin, username: "admin@example.com", ***REMOVED***)
+        user_with_pseudonym(user: @admin, username: "admin@example.com", password: "password")
 
         user_session(@admin, @admin.pseudonyms.first)
         post "/users/#{@student.id}/masquerade"

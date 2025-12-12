@@ -150,7 +150,7 @@ const assignmentGroups: AssignmentGroup[] = [
         allowed_attempts: -1,
         annotatable_attachment_id: null,
         secure_params:
-          '***REMOVED***',
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsdGlfYXNzaWdubWVudF9pZCI6ImIwY2ZhZDBkLThjNTktNDRhMS1iNTNjLTY1ZjI0N2Y5MGViYiIsImx0aV9hc3NpZ25tZW50X2Rlc2NyaXB0aW9uIjoiIn0.9SnL8X-tPwMIRGDkT3bpNxp-93145z7NMicOdoToDTQ',
         lti_context_id: 'b0cfad0d-8c59-44a1-b53c-65f247f90ebb',
         course_id: '4',
         name: 'Media Assignment',

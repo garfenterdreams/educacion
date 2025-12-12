@@ -28,7 +28,7 @@ describe PandataEvents do
       let(:fake_secrets) do
         {
           canvas_key: "canvas_key",
-          canvas_***REMOVED***,
+          canvas_secret: "canvas_secret",
         }.with_indifferent_access
       end
 

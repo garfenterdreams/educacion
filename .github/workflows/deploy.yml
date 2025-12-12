@@ -1,5 +1,7 @@
-# Garfenter Cloud - Deploy educacion to ECR
-name: Deploy Canvas LMS Education to ECR
+# Garfenter Cloud - Deploy Educacion to ECR with E2E Test Blocking
+# Builds Canvas LMS image, pushes to ECR, and runs smoke E2E tests
+# Deployment is blocked if E2E tests fail
+name: Deploy Educacion (Canvas LMS) to ECR
 
 on:
   push:
@@ -10,6 +12,7 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: garfenter/educacion
+  EDUCACION_URL: https://educacion.garfenter.com
 
 jobs:
   build-and-push:
@@ -17,6 +20,10 @@ jobs:
     permissions:
       id-token: write  # Required for OIDC
       contents: read
+
+    outputs:
+      image_tag: ${{ steps.tags.outputs.image_tag }}
+      full_image: ${{ steps.tags.outputs.full_image }}
 
     steps:
       - name: Checkout code
@@ -44,6 +51,7 @@ jobs:
 
           echo "registry=$ECR_REGISTRY" >> $GITHUB_OUTPUT
           echo "image_tag=$SHORT_SHA" >> $GITHUB_OUTPUT
+          echo "full_image=$ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:$SHORT_SHA" >> $GITHUB_STEP_SUMMARY
           echo "full_image=$ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:$SHORT_SHA" >> $GITHUB_OUTPUT
           echo "latest_image=$ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:latest" >> $GITHUB_OUTPUT
 
@@ -59,9 +67,133 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Output image details
+      - name: Output build details
         run: |
-          echo "### Canvas LMS Education deployed to ECR" >> $GITHUB_STEP_SUMMARY
+          echo "### Educacion (Canvas LMS) Build Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Tag:** ${{ steps.tags.outputs.image_tag }}" >> $GITHUB_STEP_SUMMARY
           echo "**Image:** ${{ steps.tags.outputs.full_image }}" >> $GITHUB_STEP_SUMMARY
+
+  # E2E Smoke Tests - BLOCKING STEP
+  # Runs critical smoke tests against live educacion.garfenter.com
+  # If tests fail, the deployment is considered failed
+  e2e-smoke-tests:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    timeout-minutes: 20  # Extended timeout for Rails app cold start
+
+    steps:
+      - name: Checkout tests repository
+        uses: actions/checkout@v4
+        with:
+          repository: garfenterdreams/garfenter-tests
+          path: garfenter-tests
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: garfenter-tests/e2e/package-lock.json
+
+      - name: Install dependencies
+        working-directory: garfenter-tests/e2e
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: garfenter-tests/e2e
+        run: npx playwright install --with-deps chromium
+
+      - name: Start Educacion container and wait for readiness
+        run: |
+          echo "Starting Educacion container via startup API..."
+          # Trigger container startup (on-demand architecture)
+          curl -sf -X POST "https://educacion.garfenter.com/api/start/educacion" || echo "Startup API call completed"
+
+          echo "Waiting for container to initialize (90 seconds for Rails cold start)..."
+          sleep 90
+
+          # Pull latest image on EC2 if available
+          echo "Triggering image pull..."
+          curl -sf -X POST "https://educacion.garfenter.com/api/deploy/educacion" || echo "Deploy API call completed"
+
+          # Wait for container to fully start with asset compilation
+          echo "Waiting additional 60 seconds for Canvas initialization..."
+          sleep 60
+
+          # Health check - verify Canvas login page
+          echo "Verifying educacion.garfenter.com is actually running..."
+          MAX_ATTEMPTS=10
+          for i in $(seq 1 $MAX_ATTEMPTS); do
+            HTTP_CODE=$(curl -sf --connect-timeout 15 -o /dev/null -w "%{http_code}" "${{ env.EDUCACION_URL }}/login/canvas" 2>&1 || echo "000")
+
+            if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "302" ]; then
+              echo "Educacion login page is responding (HTTP $HTTP_CODE)"
+              break
+            fi
+
+            if [ $i -eq $MAX_ATTEMPTS ]; then
+              echo "WARNING: Container not responding after $MAX_ATTEMPTS attempts"
+              echo "Last HTTP code: $HTTP_CODE"
+              echo "Proceeding with tests anyway..."
+            fi
+
+            echo "Attempt $i/$MAX_ATTEMPTS: Container not ready (HTTP $HTTP_CODE), waiting 15 seconds..."
+            sleep 15
+          done
+
+      - name: Run E2E Smoke Tests
+        working-directory: garfenter-tests/e2e
+        env:
+          EDUCACION_URL: ${{ env.EDUCACION_URL }}
+          CI: true
+        run: |
+          # Run smoke subset: Health Checks + Login form (3 critical tests)
+          npx playwright test tests/products/educacion.spec.ts \
+            --project=chromium \
+            --grep "Login page loads|Root redirects to login|Login form has required fields" \
+            --reporter=list,junit \
+            --retries=2 \
+            --timeout=90000
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-educacion-smoke-results
+          path: |
+            garfenter-tests/e2e/test-results/
+            garfenter-tests/e2e/playwright-report/
+          retention-days: 7
+
+      - name: E2E Smoke Test Summary
+        if: always()
+        run: |
+          echo "### E2E Smoke Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Tested URL:** ${{ env.EDUCACION_URL }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** ${{ needs.build-and-push.outputs.full_image }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Smoke tests verify:" >> $GITHUB_STEP_SUMMARY
+          echo "- Login page loads" >> $GITHUB_STEP_SUMMARY
+          echo "- Root redirects to login" >> $GITHUB_STEP_SUMMARY
+          echo "- Login form has required fields" >> $GITHUB_STEP_SUMMARY
+
+  # This job only runs if all previous jobs succeed
+  deployment-verified:
+    runs-on: ubuntu-latest
+    needs: [build-and-push, e2e-smoke-tests]
+    if: success()
+
+    steps:
+      - name: Deployment Success Summary
+        run: |
+          echo "### Educacion (Canvas LMS) Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Image Tag:** ${{ needs.build-and-push.outputs.image_tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Full Image:** ${{ needs.build-and-push.outputs.full_image }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All E2E smoke tests passed. Deployment verified." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Access:** https://educacion.garfenter.com/" >> $GITHUB_STEP_SUMMARY

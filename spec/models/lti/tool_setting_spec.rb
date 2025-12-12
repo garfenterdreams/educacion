@@ -28,7 +28,7 @@ module Lti
     let(:message_handler) { MessageHandler.create(message_type: "basic-lti-launch-request", launch_path: "https://samplelaunch/blti", resource_handler:) }
     let(:tool_proxy) do
       ToolProxy.create(
-        shared_***REMOVED***,
+        shared_secret: "shared_secret",
         guid: "guid",
         product_version: "1.0beta",
         lti_version: "LTI-2p0",

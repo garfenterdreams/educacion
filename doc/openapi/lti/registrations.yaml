@@ -321,7 +321,7 @@ paths:
               jwks_uri: https://example.com/api/jwks
               redirect_uris:
               - https://example.com/launch
-              registration_token: ***REMOVED***
+              registration_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNzY4LCJpbml0aWF0ZWRfYXQiOiIyMDIzLTEyLTE1VDAyOjM5OjM3WiIsInJvb3RfYWNjb3VudF9nbG9iYWxfaWQiOjAsInV1aWQiOiIzN2ExN2E2NC03ODlhLTQ5NGYtYjFjNy1lNjllN2I3ZjRlNzIiLCJleHAiOjE3MDI2MTE2Mzd9.Q9mhBLdBY8gXf_cQxB2RYOoPk6_a47gqNLpUXjVnFcc
               response_types:
               - id_token
               scope: https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly

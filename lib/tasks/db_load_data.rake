@@ -94,7 +94,7 @@ namespace :db do
         # picky. the admin should know what they're doing, and we'd rather not
         # fail here.
         pseudonym = user.pseudonyms.create!(unique_id: email,
-                                            ***REMOVED***,
+                                            password: "validpassword",
                                             password_confirmation: "validpassword",
                                             account: Account.site_admin)
         user.communication_channels.create!(path: email) { |cc| cc.workflow_state = "active" }

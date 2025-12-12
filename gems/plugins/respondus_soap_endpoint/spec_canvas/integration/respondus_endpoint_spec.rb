@@ -64,7 +64,7 @@ describe "Respondus SOAP API", type: :request do
     setting.save!
     user_with_pseudonym active_user: true,
                         username: "nobody@example.com",
-                        ***REMOVED***
+                        password: "asdfasdf"
     @user.save!
     @course = Course.create!(course_valid_attributes)
     @course.enroll_teacher(@user).accept
@@ -186,7 +186,7 @@ Implemented for: Canvas LMS)
   it "rejects a session created for a different user" do
     user2 = user_with_pseudonym active_user: true,
                                 username: "nobody2@example.com",
-                                ***REMOVED***
+                                password: "test1234"
     user2.save!
 
     status, _details, context = soap_request("ValidateAuth",

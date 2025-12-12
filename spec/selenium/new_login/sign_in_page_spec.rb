@@ -60,7 +60,7 @@ describe "new login Sign In page" do
       user_with_pseudonym(
         active_user: true,
         username: "test@example.com",
-        ***REMOVED***
+        password: "correctpassword123"
       )
       f('[data-testid="username-input"]').send_keys("test@example.com")
       f('[data-testid="password-input"]').send_keys("correctpassword123")
@@ -76,7 +76,7 @@ describe "new login Sign In page" do
       user_with_pseudonym(
         active_user: true,
         username: "test@example.com",
-        ***REMOVED***
+        password: "correctpassword123"
       )
       f('[data-testid="username-input"]').send_keys("test@example.com")
       f('[data-testid="password-input"]').send_keys("correctpassword123")
@@ -92,7 +92,7 @@ describe "new login Sign In page" do
       user_with_pseudonym(
         active_user: true,
         username: "test@example.com",
-        ***REMOVED***
+        password: "correctpassword123"
       )
       driver.manage.delete_cookie("_csrf_token")
       f('[data-testid="username-input"]').send_keys("test@example.com")
@@ -121,7 +121,7 @@ describe "new login Sign In page" do
           auth_host: "127.0.0.1",
           auth_filter: "filter1",
           auth_username: "username1",
-          auth_***REMOVED***,
+          auth_password: "password1",
           position: 1,
           jit_provisioning: false
         )

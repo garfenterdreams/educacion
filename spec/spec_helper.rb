@@ -639,7 +639,7 @@ RSpec.configure do |config|
   # Please see spec/factories for examples!
   # ****************************************************************
 
-  def login_as(username = "nobody@example.com", ***REMOVED***)
+  def login_as(username = "nobody@example.com", password = "asdfasdf")
     post "/login/canvas",
          params: { "pseudonym_session[unique_id]" => username,
                    "pseudonym_session[password]" => password }

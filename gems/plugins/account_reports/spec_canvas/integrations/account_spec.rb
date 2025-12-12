@@ -29,7 +29,7 @@ describe "Account Reports", type: :request do
     @admin = @user
     user_with_pseudonym(user: @admin,
                         username: "admin@example.com",
-                        ***REMOVED***)
+                        password: "password")
     user_session(@admin)
     @account = Account.default
 

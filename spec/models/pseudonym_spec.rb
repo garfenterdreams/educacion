@@ -59,7 +59,7 @@ describe Pseudonym do
 
   it "allows apostrophes in usernames" do
     pseudonym = Pseudonym.new(unique_id: "o'brien@example.com",
-                              ***REMOVED***,
+                              password: "password",
                               password_confirmation: "password")
     pseudonym.user_id = 1
     expect(pseudonym).to be_valid
@@ -68,7 +68,7 @@ describe Pseudonym do
   it "normalizes on validation (preserving the original input)" do
     # Ⅳ ligature gets decomposed to IV
     pseudonym = Pseudonym.new(unique_id: "HenryⅣ@instructure.com",
-                              ***REMOVED***,
+                              password: "password",
                               password_confirmation: "password")
     pseudonym.user_id = 1
     expect(pseudonym).to be_valid
@@ -336,7 +336,7 @@ describe Pseudonym do
 
   it "defaults to nil for blank integration_id and sis_user_id" do
     user_factory
-    pseudonym = Pseudonym.new(user: @user, unique_id: "test@example.com", ***REMOVED***)
+    pseudonym = Pseudonym.new(user: @user, unique_id: "test@example.com", password: "passwd123")
     pseudonym.password_confirmation = "passwd123"
     pseudonym.sis_user_id = ""
     pseudonym.integration_id = ""
@@ -517,7 +517,7 @@ describe Pseudonym do
 
   describe "valid_arbitrary_credentials?" do
     it "ignores password if canvas authentication is disabled" do
-      user_with_pseudonym(***REMOVED***)
+      user_with_pseudonym(password: "qwertyuiop")
       expect(@pseudonym.valid_arbitrary_credentials?("qwertyuiop")).to be_truthy
       # once auth provider is required, this whole spec can go away, because the situation will
       # not be possible
@@ -575,19 +575,19 @@ describe Pseudonym do
 
     it "expires session cache when password changes" do
       pseudonym = Pseudonym.create!(
-        ***REMOVED***,
+        password: "abcdefgh",
         password_confirmation: "abcdefgh",
         unique_id: "bob@instructure.com",
         user:
       )
       allow(Rails.cache).to receive(:delete)
-      pseudonym.update!(***REMOVED***, password_confirmation: "12345678")
+      pseudonym.update!(password: "12345678", password_confirmation: "12345678")
       expect(Rails.cache).to have_received(:delete).with(Pseudonym.cache_key_for(pseudonym.global_id))
     end
 
     it "does not expire session cache when password stays the same" do
       pseudonym = Pseudonym.create!(
-        ***REMOVED***,
+        password: "abcdefgh",
         password_confirmation: "abcdefgh",
         unique_id: "bob@instructure.com",
         user:
@@ -599,14 +599,14 @@ describe Pseudonym do
 
     it "expires session cache when password is re-set to the same value" do
       pseudonym = Pseudonym.create!(
-        ***REMOVED***,
+        password: "abcdefgh",
         password_confirmation: "abcdefgh",
         unique_id: "bob@instructure.com",
         user:
       )
       original_crypted_password = pseudonym.crypted_password
       allow(Rails.cache).to receive(:delete)
-      pseudonym.update!(***REMOVED***, password_confirmation: "abcdefgh")
+      pseudonym.update!(password: "abcdefgh", password_confirmation: "abcdefgh")
       # even though the password string is the same
       # the crypted_password changes due to rehashing
       expect(pseudonym.crypted_password).not_to eq(original_crypted_password)
@@ -615,20 +615,20 @@ describe Pseudonym do
 
     it "expires cache only for the updated pseudonym" do
       Pseudonym.create!(
-        ***REMOVED***,
+        password: "primarypass",
         password_confirmation: "primarypass",
         unique_id: "primary@example.com",
         user:
       )
       secondary = Pseudonym.create!(
-        ***REMOVED***,
+        password: "secondarypass",
         password_confirmation: "secondarypass",
         unique_id: "secondary@example.com",
         user:
       )
       allow(Rails.cache).to receive(:delete)
       # trigger a password update for the secondary pseudonym
-      secondary.update!(***REMOVED***, password_confirmation: "secondarynewpass")
+      secondary.update!(password: "secondarynewpass", password_confirmation: "secondarynewpass")
       # only the secondary pseudonym’s cache should be cleared
       expect(Rails.cache).to have_received(:delete).with(Pseudonym.cache_key_for(secondary.global_id)).once
     end
@@ -982,17 +982,17 @@ describe Pseudonym do
   describe ".find_all_by_arbtrary_credentials" do
     let_once(:p) do
       u = User.create!
-      u.pseudonyms.create!(unique_id: "a", account: Account.default, ***REMOVED***, password_confirmation: "abcdefgh")
+      u.pseudonyms.create!(unique_id: "a", account: Account.default, password: "abcdefgh", password_confirmation: "abcdefgh")
     end
 
     it "finds a valid pseudonym" do
-      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", ***REMOVED*** }, [Account.default.id])).to eq [p]
+      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", password: "abcdefgh" }, [Account.default.id])).to eq [p]
     end
 
     it "doesn't choke on if global lookups is down" do
       expect(GlobalLookups).to receive(:enabled?).and_return(true)
       expect(Pseudonym).to receive(:associated_shards).and_raise("an error")
-      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", ***REMOVED*** }, [Account.default.id])).to eq [p]
+      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", password: "abcdefgh" }, [Account.default.id])).to eq [p]
     end
 
     it "throws an error if your credentials are absurd" do
@@ -1004,12 +1004,12 @@ describe Pseudonym do
 
     it "doesn't find deleted pseudonyms" do
       p.update!(workflow_state: "deleted")
-      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", ***REMOVED*** }, [Account.default.id])).to eq []
+      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", password: "abcdefgh" }, [Account.default.id])).to eq []
     end
 
     it "doesn't find suspended pseudonyms" do
       p.update!(workflow_state: "suspended")
-      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", ***REMOVED*** }, [Account.default.id])).to eq []
+      expect(Pseudonym.find_all_by_arbitrary_credentials({ unique_id: "a", password: "abcdefgh" }, [Account.default.id])).to eq []
     end
   end
 
@@ -1075,7 +1075,7 @@ describe Pseudonym do
     end
 
     it "does not set @canvas_generated_password if generate temporary password conditions are not met" do
-      pseudonym.***REMOVED***
+      pseudonym.password = "password"
       pseudonym.password_confirmation = "password"
       pseudonym.save!
 

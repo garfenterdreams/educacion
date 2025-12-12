@@ -123,7 +123,7 @@ RSpec.describe Loaders::AssignmentExternalToolTagLoader do
         name: "Other Tool",
         url: "http://example.com/other",
         consumer_key: "other_key",
-        shared_***REMOVED***
+        shared_secret: "other_secret"
       )
 
       # Create external tool tags
@@ -167,7 +167,7 @@ RSpec.describe Loaders::AssignmentExternalToolTagLoader do
         name: "Other Tool",
         url: "http://example.com/other",
         consumer_key: "other_key",
-        shared_***REMOVED***
+        shared_secret: "other_secret"
       )
 
       tag2 = ContentTag.create!(

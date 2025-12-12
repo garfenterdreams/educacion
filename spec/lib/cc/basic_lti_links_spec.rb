@@ -267,7 +267,7 @@ describe CC::BasicLTILinks do
         end
 
         it "sets the shared_secret if it's a course copy" do
-          tool.shared_***REMOVED***
+          tool.shared_secret = "shared_secret"
           subject.create_blti_link(tool, lti_doc)
           xml_doc = Nokogiri::XML(xml) { |c| c.nonet.strict }
           expect(xml_doc.at_xpath('//blti:extensions/lticm:property[@name="shared_secret"]').text).to eq tool.shared_secret

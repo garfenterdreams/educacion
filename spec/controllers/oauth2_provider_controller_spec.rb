@@ -127,7 +127,7 @@ describe OAuth2ProviderController do
 
     context "with a user logged in" do
       before :once do
-        user_with_pseudonym(active_all: 1, ***REMOVED***)
+        user_with_pseudonym(active_all: 1, password: "qwertyuiop")
       end
 
       before do
@@ -1196,7 +1196,7 @@ describe OAuth2ProviderController do
       enable_developer_key_account_binding!(d)
       d
     end
-    let_once(:user) { user_with_pseudonym(active_all: 1, ***REMOVED***) }
+    let_once(:user) { user_with_pseudonym(active_all: 1, password: "qwertyuiop") }
     let(:token) { user.access_tokens.create!(developer_key: key, purpose: "test") }
 
     it "deletes the token" do

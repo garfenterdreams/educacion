@@ -795,7 +795,7 @@ describe ContentTag do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -815,7 +815,7 @@ describe ContentTag do
       tool = @course.context_external_tools.create!(
         name: "Not Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Not Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -858,7 +858,7 @@ describe ContentTag do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -882,7 +882,7 @@ describe ContentTag do
       not_quizzes_tool = @course.context_external_tools.create!(
         name: "Not Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Not Quizzes 2",
         url: "http://example.com/launch"
       )

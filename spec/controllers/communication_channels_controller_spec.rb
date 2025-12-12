@@ -213,7 +213,7 @@ describe CommunicationChannelsController do
         @user.save
         expect(@user).to be_pre_registered
 
-        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         @user.reload
         expect(@user).to be_registered
@@ -226,7 +226,7 @@ describe CommunicationChannelsController do
         @user.accept_terms
         @user.save
 
-        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         @user.reload
         expect(@user).to be_registered
@@ -240,7 +240,7 @@ describe CommunicationChannelsController do
         # another user claimed the pseudonym
         user_with_pseudonym(username: "asdf@qwerty.com", active_user: true)
 
-        post "confirm", params: { nonce: cc1.confirmation_code, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: cc1.confirmation_code, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         assert_status(400)
         u1.reload
         expect(u1).not_to be_registered
@@ -255,7 +255,7 @@ describe CommunicationChannelsController do
         expect(@pseudonym.account).to eq @account
         expect(@user).to be_pre_registered
 
-        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         @user.reload
         expect(@user).to be_registered
@@ -307,7 +307,7 @@ describe CommunicationChannelsController do
         expect(@user).to be_creation_pending
         expect(@enrollment).to be_invited
 
-        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         expect(response).to redirect_to(course_url(@course))
         @user.reload
@@ -345,7 +345,7 @@ describe CommunicationChannelsController do
         controller.instance_variable_set(:@current_user, @user)
         @domain_root_account = Account.default
 
-        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         expect(response).to redirect_to(dashboard_url)
         @user.reload
@@ -384,7 +384,7 @@ describe CommunicationChannelsController do
         expect(@user).to be_creation_pending
         expect(@enrollment).to be_invited
 
-        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         @user.reload
         expect(@user).to be_registered
@@ -423,7 +423,7 @@ describe CommunicationChannelsController do
         @cc = @user.communication_channels.create!(path: "jt@instructure.com")
         expect(@user).to be_creation_pending
 
-        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         @user.reload
         expect(@user).to be_registered
@@ -462,7 +462,7 @@ describe CommunicationChannelsController do
         expect(@enrollment).to be_invited
         @pseudonym = @user.pseudonyms.create!(unique_id: "jt@instructure.com")
 
-        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         expect(response).to redirect_to(course_url(@course))
         @user.reload
@@ -506,7 +506,7 @@ describe CommunicationChannelsController do
         expect(@user).to be_creation_pending
         expect(@enrollment).to be_invited
 
-        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         assert_status(400)
       end
 
@@ -515,7 +515,7 @@ describe CommunicationChannelsController do
         @user.update_attribute(:workflow_state, "creation_pending")
         @cc = @user.communication_channels.create!(path: "jt@instructure.com", confirmation_redirect: "http://some.place/in-the-world")
 
-        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { ***REMOVED*** } }
+        post "confirm", params: { nonce: @cc.confirmation_code, register: 1, pseudonym: { password: "asdfasdf" } }
         expect(response).to redirect_to("http://some.place/in-the-world?current_user_id=#{@user.id}")
       end
     end
@@ -721,7 +721,7 @@ describe CommunicationChannelsController do
         @user.update_attribute(:workflow_state, "creation_pending")
         @cc = @user.communication_channels.create!(path: "jt@instructure.com")
 
-        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { password: "asdfasdf", password_confirmation: "asdfasdf" } }
         expect(response).to be_redirect
         expect(response).to redirect_to(course_url(@course))
         @enrollment.reload
@@ -738,7 +738,7 @@ describe CommunicationChannelsController do
         @user.update_attribute(:workflow_state, "creation_pending")
         @cc = @user.communication_channels.create!(path: "jt@instructure.com")
 
-        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { unique_id: "haxxor@example.com", ***REMOVED***, password_confirmation: "asdfasdf" } }
+        post "confirm", params: { nonce: @cc.confirmation_code, enrollment: @enrollment.uuid, register: 1, pseudonym: { unique_id: "haxxor@example.com", password: "asdfasdf", password_confirmation: "asdfasdf" } }
 
         expect(@user.reload.pseudonyms.first.unique_id).to eq "jt@instructure.com"
       end

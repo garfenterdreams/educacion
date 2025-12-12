@@ -36,7 +36,7 @@ describe "SpeedGrader - discussion submissions", :ignore_js_errors do
       name: "first student",
       active_user: true,
       username: "student@example.com",
-      ***REMOVED***
+      password: "qwertyuiop"
     )
     @course.enroll_user(@student, "StudentEnrollment", enrollment_state: "active")
     # create and enroll second student
@@ -44,7 +44,7 @@ describe "SpeedGrader - discussion submissions", :ignore_js_errors do
       name: "second student",
       active_user: true,
       username: "student2@example.com",
-      ***REMOVED***
+      password: "qwertyuiop"
     )
     @course.enroll_user(@student_2, "StudentEnrollment", enrollment_state: "active")
 

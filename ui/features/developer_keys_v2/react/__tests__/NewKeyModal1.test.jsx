@@ -59,7 +59,7 @@ describe('NewKeyModal', () => {
   const developerKey = {
     access_token_count: 77,
     account_name: 'bob account',
-    ***REMOVED***,
+    api_key: 'rYcJ7LnUbSAuxiMh26tXTSkaYWyfRPh2lr6FqTLqx0FRsmv44EVZ2yXC8Rgtabc3',
     created_at: '2018-02-09T20:36:50Z',
     email: 'bob@myemail.com',
     icon_url: 'http://my_image.com',

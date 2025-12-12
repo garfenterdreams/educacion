@@ -866,7 +866,7 @@ describe ContentMigrationsController, type: :request do
         @course.account.context_external_tools.create!(
           name: "Quizzes.Next",
           consumer_key: "test_key",
-          shared_***REMOVED***,
+          shared_secret: "test_secret",
           config_url: "http://example.com/config.xml",
           tool_id: "quizzes_next",
           domain: "example.com"

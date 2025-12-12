@@ -32,7 +32,7 @@ describe "profile/profile" do
     assign(:sms_channels, [])
     assign(:notification_categories, Notification.dashboard_categories)
     assign(:policies, NotificationPolicy.for(@user))
-    assign(:default_pseudonym, @user.pseudonyms.create!(unique_id: "unique@example.com", ***REMOVED***, password_confirmation: "asdfaabb"))
+    assign(:default_pseudonym, @user.pseudonyms.create!(unique_id: "unique@example.com", password: "asdfaabb", password_confirmation: "asdfaabb"))
     assign(:pseudonyms, @user.pseudonyms)
     assign(:password_pseudonyms, [])
     render "profile/profile"
@@ -50,7 +50,7 @@ describe "profile/profile" do
     assign(:sms_channels, [])
     assign(:notification_categories, Notification.dashboard_categories)
     assign(:policies, NotificationPolicy.for(@user))
-    default_pseudonym = assign(:default_pseudonym, @user.pseudonyms.create!(unique_id: "unique@example.com", ***REMOVED***, password_confirmation: "asdfaabb"))
+    default_pseudonym = assign(:default_pseudonym, @user.pseudonyms.create!(unique_id: "unique@example.com", password: "asdfaabb", password_confirmation: "asdfaabb"))
     sis_pseudonym = @user.pseudonyms.create!(unique_id: "sis_unique@example.com") { |p| p.sis_user_id = "sis_id" }
     assign(:pseudonyms, @user.pseudonyms)
     assign(:password_pseudonyms, [])
@@ -71,7 +71,7 @@ describe "profile/profile" do
     assign(:sms_channels, [])
     assign(:notification_categories, Notification.dashboard_categories)
     assign(:policies, NotificationPolicy.for(@user))
-    default_pseudonym = assign(:default_pseudonym, @user.pseudonyms.create!(unique_id: "unique@example.com", ***REMOVED***, password_confirmation: "asdfaabb"))
+    default_pseudonym = assign(:default_pseudonym, @user.pseudonyms.create!(unique_id: "unique@example.com", password: "asdfaabb", password_confirmation: "asdfaabb"))
     assign(:pseudonyms, @user.pseudonyms)
     assign(:password_pseudonyms, [])
     render "profile/profile"

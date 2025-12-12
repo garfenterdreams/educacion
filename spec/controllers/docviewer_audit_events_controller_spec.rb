@@ -26,7 +26,7 @@ describe DocviewerAuditEventsController do
     @second_ta = ta_in_course(name: "Second Ta", course: @course, enrollment_state: :active).user
     @teacher = teacher_in_course(name: "teacher", course: @course, enrollment_state: :active).user
     @admin = account_admin_user
-    @encoded64_***REMOVED***
+    @encoded64_secret = "c2Vrcml0"
     @secret = Base64.decode64(@encoded64_secret)
     @attachment = @student.attachments.create!(course: @course, content_type: "text/plain", filename: "attachment.txt")
     Canvadoc.create!(document_id: "abc123#{@attachment.id}", attachment_id: @attachment.id)

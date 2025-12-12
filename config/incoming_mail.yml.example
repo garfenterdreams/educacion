@@ -38,7 +38,7 @@ production:
     port: 995
     ssl: true
     username: "user"
-    ***REMOVED***
+    password: "password"
 
 # To configure multiple pop3/imap accounts, configure a pop3/imap/directory
 # section with default values and add an accounts section that contains an

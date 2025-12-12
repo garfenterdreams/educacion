@@ -71,7 +71,7 @@ describe "self enrollment" do
     end
 
     it "authenticates and register an existing user" do
-      user_with_pseudonym(active_all: true, username: "existing@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: true, username: "existing@example.com", password: "asdfasdf")
       custom_label = "silly id"
       allow_any_instance_of(Account).to receive(:login_handle_name).and_return(custom_label)
 
@@ -103,7 +103,7 @@ describe "self enrollment" do
     end
 
     it "does not error with a user that is already enrolled" do
-      user_with_pseudonym(active_all: true, username: "existing@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: true, username: "existing@example.com", password: "asdfasdf")
       student_in_course(course: @course, user: @user, active_enrollment: true)
 
       get "/enroll/#{@course.self_enrollment_code}"
@@ -136,7 +136,7 @@ describe "self enrollment" do
     end
 
     it "authenticates and register an existing user" do
-      user_with_pseudonym(active_all: true, username: "existing@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: true, username: "existing@example.com", password: "asdfasdf")
       custom_label = "silly id"
       allow_any_instance_of(Account).to receive(:login_handle_name).and_return(custom_label)
 
@@ -167,7 +167,7 @@ describe "self enrollment" do
     end
 
     it "does not error with a user that is already enrolled" do
-      user_with_pseudonym(active_all: true, username: "existing@example.com", ***REMOVED***)
+      user_with_pseudonym(active_all: true, username: "existing@example.com", password: "asdfasdf")
       student_in_course(course: @course, user: @user, active_enrollment: true)
 
       get "/enroll/#{@course.self_enrollment_code}"

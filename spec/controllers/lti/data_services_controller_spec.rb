@@ -42,7 +42,7 @@ describe Lti::DataServicesController do
   end
 
   before do
-    allow(CanvasSecurity::ServicesJwt).to receive_messages(encryption_***REMOVED*** * 2, signing_***REMOVED*** * 10)
+    allow(CanvasSecurity::ServicesJwt).to receive_messages(encryption_secret: "setecastronomy92" * 2, signing_secret: "donttell" * 10)
     allow(HTTParty).to receive(:send).and_return(double(body: subscription, code: 200))
     allow(DynamicSettings).to receive(:find).and_call_original
     allow(DynamicSettings).to receive(:find)

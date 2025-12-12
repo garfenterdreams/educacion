@@ -26,7 +26,7 @@ describe "security" do
     it "changes the cookie session id after logging in" do
       u = user_with_pseudonym active_user: true,
                               username: "nobody@example.com",
-                              ***REMOVED***
+                              password: "asdfasdf"
       u.save!
 
       https!
@@ -59,7 +59,7 @@ describe "security" do
       # again (there's separate specs for that).
       u = user_with_pseudonym active_user: true,
                               username: "nobody@example.com",
-                              ***REMOVED***
+                              password: "asdfasdf"
       u.save!
       https!
 
@@ -85,7 +85,7 @@ describe "security" do
     it "does not return pseudonym_credentials when not remember_me" do
       u = user_with_pseudonym active_user: true,
                               username: "nobody@example.com",
-                              ***REMOVED***
+                              password: "asdfasdf"
       u.save!
       https!
       post "/login/canvas", params: { "pseudonym_session[unique_id]" => "nobody@example.com",
@@ -103,7 +103,7 @@ describe "security" do
     before do
       @u = user_with_pseudonym active_all: true,
                                username: "nobody@example.com",
-                               ***REMOVED***
+                               password: "asdfasdf"
       @u.save!
       @p = @u.pseudonym
       https!
@@ -136,7 +136,7 @@ describe "security" do
 
       @p.update_attribute(:current_login_at, 5.minutes.ago)
 
-      post "/login/canvas", params: { pseudonym_session: { unique_id: @p.unique_id, ***REMOVED*** } }
+      post "/login/canvas", params: { pseudonym_session: { unique_id: @p.unique_id, password: "asdfasdf" } }
       expect(response).to redirect_to settings_profile_url
       expect(session[:used_remember_me_token]).not_to be_truthy
 
@@ -301,7 +301,7 @@ describe "security" do
       before do
         u = user_with_pseudonym active_user: true,
                                 username: "nobody@example.com",
-                                ***REMOVED***
+                                password: "asdfasdf"
         u.save!
         @account = @pseudonym.account
         @account.settings[:password_policy] = { maximum_login_attempts: 1 }
@@ -331,7 +331,7 @@ describe "security" do
       it "does not block other users" do
         bad_login("5.5.5.5")
         expect(response.body).to match(/Please verify your username or password and try again/)
-        user_with_pseudonym(active_user: true, username: "second@example.com", ***REMOVED***).save!
+        user_with_pseudonym(active_user: true, username: "second@example.com", password: "12341234").save!
         post "/login/canvas",
              params: { "pseudonym_session[unique_id]" => "second@example.com", "pseudonym_session[password]" => "12341234" },
              headers: { "REMOTE_ADDR" => "5.5.5.5" }
@@ -400,12 +400,12 @@ describe "security" do
 
       student_in_course
       @student = @user
-      user_with_pseudonym user: @student, username: "student@example.com", ***REMOVED***
+      user_with_pseudonym user: @student, username: "student@example.com", password: "password"
       @student_pseudonym = @pseudonym
 
       account_admin_user account: Account.site_admin
       @admin = @user
-      user_with_pseudonym user: @admin, username: "admin@example.com", ***REMOVED***
+      user_with_pseudonym user: @admin, username: "admin@example.com", password: "password"
     end
 
     it "requires confirmation for becoming a user" do
@@ -516,7 +516,7 @@ describe "security" do
 
       @admin.pseudonyms.first.update_attribute(:current_login_at, 5.minutes.ago)
 
-      post "/login/canvas", params: { pseudonym_session: { unique_id: @admin.pseudonyms.first.unique_id, ***REMOVED*** } }
+      post "/login/canvas", params: { pseudonym_session: { unique_id: @admin.pseudonyms.first.unique_id, password: "password" } }
       expect(response).to redirect_to user_masquerade_url(@student)
       expect(session[:used_remember_me_token]).not_to be_truthy
 

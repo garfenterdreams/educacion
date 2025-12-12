@@ -92,7 +92,7 @@ describe "LoggingFilter" do
       filtered_params = LoggingFilter.filter_params(params)
       expect(filtered_params).to eq({
                                       pseudonym_session: {
-                                        ***REMOVED***
+                                        password: "[FILTERED]"
                                       }
                                     })
     end

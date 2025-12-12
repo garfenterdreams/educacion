@@ -236,7 +236,7 @@ describe UserListV2 do
       user_with_pseudonym(name: "JT", username: "jt@instructure.com", active_all: true)
       @shard1.activate do
         @account = Account.create!(name: "accountnaem")
-        ps = @account.pseudonyms.build(user: @user, unique_id: "username", ***REMOVED***, password_confirmation: "password")
+        ps = @account.pseudonyms.build(user: @user, unique_id: "username", password: "password", password_confirmation: "password")
         ps.save_without_session_maintenance
         @user.communication_channels.first.update!(pseudonym: ps)
       end

@@ -20,7 +20,7 @@
 module LtiSpecHelper
   def create_tool_proxy(opts = {})
     default_opts = {
-      shared_***REMOVED***,
+      shared_secret: "shared_secret",
       guid: SecureRandom.uuid,
       product_version: "1.0beta",
       lti_version: "LTI-2p0",

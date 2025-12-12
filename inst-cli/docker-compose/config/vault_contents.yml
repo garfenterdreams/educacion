@@ -9,7 +9,7 @@ development:
   inst_fs:
     app_host: "http://api.instfs.docker"
     # this is just "super-sekret-value", base64-encoded:
-    ***REMOVED***
+    secret: "c3VwZXItc2VrcmV0LXZhbHVlCg=="
   'sts/testaccount/sts/canvas-shards-lookupper-dev':
       access_key: 'fake-access-key'
       secret_key: 'fake-secret-key'
@@ -29,8 +29,8 @@ development:
         api_secret: <uuid-provisioner-api-secret>
         outcomes_api_secret: fake-outcomes-secret
       canvas_security:
-        encryption_***REMOVED***
-        signing_***REMOVED***
+        encryption_secret: "astringthatisactually32byteslong"
+        signing_secret: "astringthatisactually32byteslong"
       # These two keys are real RSA keys that were generated for ease of local development for New Quizzes rich content links
       # They should NEVER be used in production!
       # The encryption key is not the same keypair as the signature key

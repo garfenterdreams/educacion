@@ -24,7 +24,7 @@ describe PandataEvents::CredentialService do
       canvas_key: "CANVAS",
       canvas_secret: "secret",
       other_key: "OTHER",
-      other_***REMOVED***,
+      other_secret: "other_secret",
     }.with_indifferent_access
   end
 

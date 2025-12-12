@@ -437,8 +437,8 @@ shared_examples "context modules for students" do
 
     it "shows Mark as Done button for assignments with external tool submission", priority: "2" do
       allow(BasicLTI::Sourcedid).to receive_messages(
-        encryption_***REMOVED***,
-        signing_***REMOVED***
+        encryption_secret: "encryption-secret-5T14NjaTbcYjc4",
+        signing_secret: "signing-secret-vp04BNqApwdwUYPUI"
       )
       tool = @course.context_external_tools.create!(name: "a",
                                                     url: "http://localhost:3000/",

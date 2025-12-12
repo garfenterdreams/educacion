@@ -574,9 +574,9 @@ describe AccountNotification do
 
         # Create 2 users that have no enrollments in each account
         user1 = User.create!(name: "account 1", workflow_state: "registered")
-        user1.pseudonyms.create!(unique_id: "a1", ***REMOVED***, password_confirmation: "password", account: account1)
+        user1.pseudonyms.create!(unique_id: "a1", password: "password", password_confirmation: "password", account: account1)
         user2 = User.create!(name: "account 2", workflow_state: "registered")
-        user2.pseudonyms.create!(unique_id: "a1", ***REMOVED***, password_confirmation: "password", account: account2)
+        user2.pseudonyms.create!(unique_id: "a1", password: "password", password_confirmation: "password", account: account2)
         # Create Notification in account 1
         an = account_notification(account: account1, role_ids: [nil], domain_specific: true, send_message: true)
 

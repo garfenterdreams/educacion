@@ -27,7 +27,7 @@ module Factories
     {
       user_id: User.create!.id,
       token: "value for token",
-      ***REMOVED***,
+      secret: "value for secret",
       protocol: "value for protocol",
       service: "value for service",
       service_user_url: "value for service_user_url",

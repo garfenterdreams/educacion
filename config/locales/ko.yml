@@ -140,7 +140,7 @@ ko:
     api_error: "기관 %{auth}에 대한 표준을 업데이트할 수 없습니다."
     bad_ab_file: "제공한 Academic Benchmark 파일에 오류가 있습니다."
     bad_response_all: "표준을 업데이트할 수 없습니다."
-    no_***REMOVED***
+    no_api_key: "Academic Benchmarks를 이용하려면 API 키가 필요합니다."
     no_authority: "업데이트할 기관을 찾을 수 없음"
     no_file: "성과 파일이나 주어진 기관이 없음"
     no_permissions: "사용자가 전체 성과를 편집하도록 허용되지 않음"
@@ -998,7 +998,7 @@ ko:
         turnitin_comments: "제출물 설명"
         turnitin_host: "Turnitin 호스트"
         turnitin_pledge: "Turnitin 서약"
-        turnitin_shared_***REMOVED***
+        turnitin_shared_secret: "Turnitin 공유 비밀"
       links: 
         add_admins: "계정 관리자 추가"
         configure_report: 구성...
@@ -7614,7 +7614,7 @@ ko:
         buttons: 
           request_password: "암호 요청"
         coenrollment_banner: "*Canvas 사용자 부모입니까?* **계정을 만드시려면 여기를 클릭하십시오**"
-        dont_know_***REMOVED***
+        dont_know_password: "암호를 모르십니까?"
         labels: 
           password: 암호
           remember_me: "로그인 상태 유지"
@@ -10507,7 +10507,7 @@ ko:
         plugin_enabled: 사용함
     med_cornell_export: 
       labels: 
-        ***REMOVED***
+        password: "인증에 사용할 암호"
         username: "인증에 사용할 사용자 이름"
     notices: 
       settings_updated: "플러그 인 설정을 성공적으로 업데이트했습니다."
@@ -10920,11 +10920,11 @@ ko:
       titles: 
         change_password: "%{user}의 로그인 암호 변경"
     errors: 
-      cant_change_***REMOVED***
+      cant_change_password: "해당 로그인의 암호를 변경할 수 없거나 로그인이 없음"
       login_required: "사용자는 적어도 하나 이상의 로그인을 가지고 있어야 함"
     login: 
       invalid_login: "유효하지 않은 로그인"
-      invalid_***REMOVED***
+      invalid_password: "유효하지 않은 암호"
       parent_signup: "부모 등록"
       password_confirmation_sent: "암호 확인을 %{email_address}로 전송했습니다. 스팸 상자를 확인하는 것을 잊지 마십시오."
     notices: 

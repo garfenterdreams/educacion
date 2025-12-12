@@ -250,7 +250,7 @@ Example Request:
 ```bash
 curl -X PUT \
   http://canvas.docker/api/lti/tool_proxy/0ce4dbf1-b8c5-407d-85ac-618d7615a5a5/courses/24/resource_link_id/b2d9b916-5128-42ad-ad17-b54091a52be2/tool_setting \
-  -H 'Authorization: Bearer ***REMOVED***' \
+  -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDYW52YXMiLCJzdWIiOiIwY2U0ZGJmMS1iOGM1LTQwN2QtODVhYy02MThkNzYxNWE1YTUiLCJleHAiOjE1MTI3NTYwOTMsImF1ZCI6WyJjYW52YXMuZG9ja2VyIiwiY2FudmFzLmRvY2tlciJdLCJpYXQiOjE1MTI3NTI0OTMsIm5iZiI6MTUxMjc1MjQ2MywianRpIjoiZTY3MmM5OGItYmM4NS00NjliLWE5YjYtNjEyMDE2MWFhZjk0Iiwic2hhcmRfaWQiOjEsInJlZ19rZXkiOiIwY2U0ZGJmMS1iOGM1LTQwN2QtODVhYy02MThkNzYxNWE1YTUifQ.InMhzWYLhcAWRJHJsy9pRojEcQ5KRUtRGp50mQmFrnA' \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
 ```
@@ -275,7 +275,7 @@ Example Request:
 ```bash
 curl -X GET \
   http://canvas.docker/api/lti/tool_proxy/0ce4dbf1-b8c5-407d-85ac-618d7615a5a5/courses/24/resource_link_id/b2d9b916-5128-42ad-ad17-b54091a52be2/tool_setting \
-  -H 'Authorization: Bearer ***REMOVED***' \
+  -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDYW52YXMiLCJzdWIiOiIwY2U0ZGJmMS1iOGM1LTQwN2QtODVhYy02MThkNzYxNWE1YTUiLCJleHAiOjE1MTI3NTYwOTMsImF1ZCI6WyJjYW52YXMuZG9ja2VyIiwiY2FudmFzLmRvY2tlciJdLCJpYXQiOjE1MTI3NTI0OTMsIm5iZiI6MTUxMjc1MjQ2MywianRpIjoiZTY3MmM5OGItYmM4NS00NjliLWE5YjYtNjEyMDE2MWFhZjk0Iiwic2hhcmRfaWQiOjEsInJlZ19rZXkiOiIwY2U0ZGJmMS1iOGM1LTQwN2QtODVhYy02MThkNzYxNWE1YTUifQ.InMhzWYLhcAWRJHJsy9pRojEcQ5KRUtRGp50mQmFrnA' \
   -H 'Cache-Control: no-cache' \
   -H 'Content-Type: application/x-www-form-urlencoded'
 ```

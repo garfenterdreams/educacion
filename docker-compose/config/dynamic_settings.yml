@@ -12,7 +12,7 @@ development:
       # prefix
       address-book:
         app-host: 'http://address-book.docker'
-        ***REMOVED***
+        secret: 'opensesame'
       live_events.yml: |-
         aws_endpoint: http://kinesis.canvaslms.docker
         kinesis_stream_name: live-events

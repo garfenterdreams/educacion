@@ -25,10 +25,10 @@ development:
   'app-canvas/data/secrets':
     data:
       canvas_security:
-        encryption_***REMOVED***
-        signing_***REMOVED***
+        encryption_secret: "astringthatisactually32byteslong"
+        signing_secret: "astringthatisactually32byteslong"
       lti_platform_storage:
-        signing_***REMOVED***
+        signing_secret: "astringthatisactually32byteslong"
       cedar_client:
         cedar_hostname: "http://cedar-api:3000"
         cedar_audience: "cedar-local"
@@ -41,11 +41,11 @@ development:
         token: "super-sekret-value"
 #     pandata_creds:
 #       canvas_key: 'INTERNAL_TEST'
-#       canvas_***REMOVED***
+#       canvas_secret: 'internaltest'
 #       canvas_secret_alg: 'HS256'
       learn_platform_creds:
         learn_platform_basic_token: 'internaltest'
-        service_***REMOVED***
+        service_secret: 'your-secret-here'
         service_name: 'your-name'
 #      canvas_cdn_creds:
 #        aws_access_key_id: <access_key_id>
@@ -75,7 +75,7 @@ development:
         # if you are using inst-cli you have to use this host instead:
         # app_host: "http://inst-fs-api.<your INST_DOMAIN>"
         app_host: "http://api.inst-fs.docker"
-        ***REMOVED***
+        secret: "YXN0cmluZ3RoYXRpc2FjdHVhbGx5MzJieXRlc2xvbmc="
 #      linked_in_creds:
 #        api_key: <api_key>
 #        secret_key: <secret_key>

@@ -478,7 +478,7 @@ describe AuthenticationProvider::Clever do
 
   describe "plugin settings" do
     it "accesses client_id from plugin settings" do
-      PluginSetting.create!(name: "clever", settings: { client_id: "plugin_id", client_***REMOVED*** })
+      PluginSetting.create!(name: "clever", settings: { client_id: "plugin_id", client_secret: "plugin_secret" })
       ap = AuthenticationProvider::Clever.new
       expect(ap.client_id).to eq "plugin_id"
       expect(ap.client_secret).to eq "plugin_secret"
@@ -489,7 +489,7 @@ describe AuthenticationProvider::Clever do
       expect(ap.client_id).to be_nil
       expect(ap.client_secret).to be_nil
       ap.client_id = "instance_id"
-      ap.client_***REMOVED***
+      ap.client_secret = "instance_secret"
       expect(ap.client_id).to eq "instance_id"
       expect(ap.client_secret).to eq "instance_secret"
     end

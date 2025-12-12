@@ -22,7 +22,7 @@ describe Attachments::S3Storage do
 
   describe "#sign_policy" do
     # example values from http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html
-    let(:access_key_id) { "***REMOVED***" }
+    let(:access_key_id) { "AKIAIOSFODNN7EXAMPLE" }
     let(:secret_access_key) { "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" }
     let(:datetime) { "20151229T000000Z" }
     let(:string_to_sign) { <<~BASE64.delete("\n") }

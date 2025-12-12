@@ -206,7 +206,7 @@ describe "eportfolios file upload" do
   include_context "in-process server selenium tests"
 
   before :once do
-    @***REMOVED***
+    @password = "asdfasdf"
     @student = user_with_pseudonym active_user: true,
                                    username: "student@example.com",
                                    password: @password

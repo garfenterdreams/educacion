@@ -144,7 +144,7 @@ describe PseudonymsController, type: :request do
         json = api_call(:post, @path, @path_options, {
                           user: { id: @student.id },
                           login: {
-                            ***REMOVED***,
+                            password: "abcd1234",
                             sis_user_id: "12345",
                             unique_id: "test@example.com",
                             declared_user_type: "teacher",
@@ -171,7 +171,7 @@ describe PseudonymsController, type: :request do
         raw_api_call(:post, @path, @path_options, {
                        user: { id: @student.id },
                        login: {
-                         ***REMOVED***,
+                         password: "abcd1234",
                          sis_user_id: "12345",
                          unique_id: "duplicate@example.com"
                        }
@@ -184,7 +184,7 @@ describe PseudonymsController, type: :request do
         raw_api_call(:post, @path, @path_options, {
                        user: { id: @student.id },
                        login: {
-                         ***REMOVED***,
+                         password: "abcd1234",
                          sis_user_id: "12345",
                          unique_id: "duplicate@example.com"
                        }
@@ -202,7 +202,7 @@ describe PseudonymsController, type: :request do
         raw_api_call(:post, @path, @path_options, {
                        user: { id: @student.id },
                        login: {
-                         ***REMOVED***,
+                         password: "abcd1234",
                          unique_id: "student@example.com",
                          authentication_provider_id: "cas"
                        }
@@ -217,7 +217,7 @@ describe PseudonymsController, type: :request do
         raw_api_call(:post, @path, @path_options, {
                        user: { id: @admin.id },
                        login: {
-                         ***REMOVED***,
+                         password: "abcd1234",
                          sis_user_id: "12345",
                          unique_id: "test@example.com"
                        }
@@ -264,7 +264,7 @@ describe PseudonymsController, type: :request do
         json = api_call(:put, @path, @path_options, {
                           login: {
                             unique_id: "student+new@example.com",
-                            ***REMOVED***,
+                            password: "password123",
                             sis_user_id: "new-12345",
                             declared_user_type: "teacher",
                           }
@@ -415,7 +415,7 @@ describe PseudonymsController, type: :request do
 
       context "updating own password" do
         before(:once) do
-          @student.pseudonym.***REMOVED***
+          @student.pseudonym.password = "password"
           @student.pseudonym.password_confirmation = "password"
           @student.pseudonym.save!
           @user = @student
@@ -424,7 +424,7 @@ describe PseudonymsController, type: :request do
         it "fails without old_password" do
           raw_api_call(:put, @path, @path_options, {
                          login: {
-                           ***REMOVED***,
+                           password: "new_password",
                          }
                        })
           assert_status(400)
@@ -435,8 +435,8 @@ describe PseudonymsController, type: :request do
         it "fails with an incorrect old_password" do
           raw_api_call(:put, @path, @path_options, {
                          login: {
-                           ***REMOVED***,
-                           old_***REMOVED***
+                           password: "new_password",
+                           old_password: "bad_old_password"
                          }
                        })
           assert_status(400)
@@ -447,8 +447,8 @@ describe PseudonymsController, type: :request do
         it "succeeds with all required params" do
           raw_api_call(:put, @path, @path_options, {
                          login: {
-                           ***REMOVED***,
-                           old_***REMOVED***
+                           password: "new_password",
+                           old_password: "password"
                          }
                        })
           expect(response).to be_successful

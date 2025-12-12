@@ -83,7 +83,7 @@ describe('Register Service', () => {
       const result = await createParentAccount({
         name: 'Test Parent',
         email: 'parent@example.com',
-        ***REMOVED***,
+        password: 'testPass123',
         confirmPassword: 'testPass123',
         pairingCode: 'PAIR123',
         termsAccepted: true,
@@ -101,7 +101,7 @@ describe('Register Service', () => {
           },
           pseudonym: {
             unique_id: 'parent@example.com',
-            ***REMOVED***,
+            password: 'testPass123',
             password_confirmation: 'testPass123',
           },
           pairing_code: {
@@ -121,7 +121,7 @@ describe('Register Service', () => {
       const result = await createParentAccount({
         name: 'Test Parent',
         email: 'parent@example.com',
-        ***REMOVED***,
+        password: 'testPass123',
         confirmPassword: 'testPass123',
         pairingCode: 'PAIR123',
         termsAccepted: false,
@@ -140,7 +140,7 @@ describe('Register Service', () => {
       const result = await createStudentAccount({
         name: 'Test Student',
         username: 'testStudent',
-        ***REMOVED***,
+        password: 'studentPass123',
         confirmPassword: 'studentPass123',
         joinCode: 'JOIN123',
         email: 'student@example.com',
@@ -159,7 +159,7 @@ describe('Register Service', () => {
           },
           pseudonym: {
             unique_id: 'testStudent',
-            ***REMOVED***,
+            password: 'studentPass123',
             password_confirmation: 'studentPass123',
             path: 'student@example.com',
           },
@@ -179,7 +179,7 @@ describe('Register Service', () => {
       const result = await createStudentAccount({
         name: 'Test Student',
         username: 'testStudent',
-        ***REMOVED***,
+        password: 'studentPass123',
         confirmPassword: 'studentPass123',
         joinCode: 'JOIN123',
         termsAccepted: true,
@@ -197,7 +197,7 @@ describe('Register Service', () => {
           },
           pseudonym: {
             unique_id: 'testStudent',
-            ***REMOVED***,
+            password: 'studentPass123',
             password_confirmation: 'studentPass123',
           },
           self_enrollment: '1',
@@ -213,7 +213,7 @@ describe('Register Service', () => {
       const result = await createStudentAccount({
         name: 'Test Student',
         username: 'testStudent',
-        ***REMOVED***,
+        password: 'studentPass123',
         confirmPassword: 'studentPass123',
         joinCode: 'JOIN123',
         termsAccepted: false,

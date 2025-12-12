@@ -383,7 +383,7 @@ describe "dashboard" do
 
     it "displays assignment to grade in to do list for a teacher", priority: "1" do
       assignment = assignment_model({ submission_types: "online_text_entry", course: @course })
-      student = user_with_pseudonym(active_user: true, username: "student@example.com", ***REMOVED***)
+      student = user_with_pseudonym(active_user: true, username: "student@example.com", password: "qwertyuiop")
       @course.enroll_user(student, "StudentEnrollment", enrollment_state: "active")
       assignment.reload
       assignment.submit_homework(student, { submission_type: "online_text_entry", body: "ABC" })

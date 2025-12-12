@@ -27,7 +27,7 @@ describe IncomingMailProcessor::ImapMailbox do
     {
       server: "mail.example.com",
       username: "user",
-      ***REMOVED***,
+      password: "password",
     }
   end
 
@@ -56,7 +56,7 @@ describe IncomingMailProcessor::ImapMailbox do
                                                           ssl: "truthy-value",
                                                           filter: ["ALL"],
                                                           username: "user@server.com",
-                                                          ***REMOVED***,
+                                                          password: "secret-user-password",
                                                         })
 
       expect(@mailbox.server).to eql "imap.server.com"

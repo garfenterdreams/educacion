@@ -36,7 +36,7 @@ describe Canvas::Plugins::Validators::AdobeConnectValidator do
     valid_keys = {
       domain: "example.com",
       login: "username",
-      ***REMOVED***,
+      password: "password",
       meeting_container: "folder_name",
       use_sis_ids: true
     }

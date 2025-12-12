@@ -170,7 +170,7 @@ module Canvas
       describe "locking and loading" do
         let(:credential_path) { "test/vault/creds/path" }
         let(:lease_duration) { 3600 }
-        let(:credential_data) { { credential_id: "aabbccdd", credential_***REMOVED*** } }
+        let(:credential_data) { { credential_id: "aabbccdd", credential_secret: "pampelmousse" } }
 
         before do
           skip("Must have a local redis available to run this spec") unless Canvas.redis_enabled?

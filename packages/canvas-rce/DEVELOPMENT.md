@@ -24,8 +24,8 @@ And in `canvas-lms/config/vault_contents.yml`:
 
 ```yaml
       canvas_security:
-        encryption_***REMOVED***
-        signing_***REMOVED***
+        encryption_secret: "astringthatisactually32byteslong"
+        signing_secret: "astringthatisactually32byteslong"
 ```
 
 ## Developing

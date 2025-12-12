@@ -23,7 +23,7 @@ require "nokogiri"
 describe "concluded/unconcluded courses" do
   before do
     username = "nobody@example.com"
-    ***REMOVED***
+    password = "asdfasdf"
     u = user_with_pseudonym(active_user: true,
                             username:,
                             password:)

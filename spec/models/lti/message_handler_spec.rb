@@ -279,7 +279,7 @@ module Lti
     def create_tool_proxy(opts = {})
       default_opts = {
         context: account,
-        shared_***REMOVED***,
+        shared_secret: "shared_secret",
         guid: SecureRandom.uuid,
         product_version: "1.0beta",
         lti_version: "LTI-2p0",

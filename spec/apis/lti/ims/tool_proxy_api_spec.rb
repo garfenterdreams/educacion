@@ -78,7 +78,7 @@ module Lti
           allow(OAuth::Signature).to receive(:build).and_return(mock_oauth_sig)
           allow(OAuth::Helper).to receive(:parse_header).and_return({ "oauth_consumer_key" => "key" })
           allow(Lti::RegistrationRequestService).to receive(:retrieve_registration_password).and_return({
-                                                                                                          reg_***REMOVED***,
+                                                                                                          reg_password: "password",
                                                                                                           registration_url: "http://example.com/register"
                                                                                                         })
         end
@@ -177,7 +177,7 @@ module Lti
           course_with_teacher_logged_in(active_all: true)
           allow(Lti::RegistrationRequestService).to receive(:retrieve_registration_password)
             .with(@course.account, "reg_key").and_return({
-                                                           reg_***REMOVED***,
+                                                           reg_password: "password",
                                                            registration_url: "http://example.com/register"
                                                          })
           tool_proxy_fixture = Rails.root.join("spec/fixtures/lti/tool_proxy.json").read

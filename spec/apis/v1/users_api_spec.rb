@@ -1656,7 +1656,7 @@ describe "Users API", type: :request do
                  },
                  pseudonym: {
                    unique_id: "test@example.com",
-                   ***REMOVED***,
+                   password: "password123",
                    sis_user_id: "12345",
                    send_confirmation: 0
                  },
@@ -1751,7 +1751,7 @@ describe "Users API", type: :request do
                    },
                    pseudonym: {
                      unique_id: "test@example.com",
-                     ***REMOVED***,
+                     password: "password123",
                      sis_user_id: "12345",
                      send_confirmation: 0
                    },
@@ -1809,7 +1809,7 @@ describe "Users API", type: :request do
                           },
                           pseudonym: {
                             unique_id: "test@example.com",
-                            ***REMOVED***,
+                            password: "password123",
                           },
                           destination: "http://www.example.com/courses/1"
                         })
@@ -1826,7 +1826,7 @@ describe "Users API", type: :request do
                           },
                           pseudonym: {
                             unique_id: "test@example.com",
-                            ***REMOVED***,
+                            password: "password123",
                           },
                           destination: "http://hacker.com/courses/1"
                         })
@@ -1843,7 +1843,7 @@ describe "Users API", type: :request do
                           },
                           pseudonym: {
                             unique_id: "test@example.com",
-                            ***REMOVED***,
+                            password: "password123",
                           },
                           destination: "http://www.example.com/hacker/1"
                         })
@@ -1865,7 +1865,7 @@ describe "Users API", type: :request do
                           { controller: "users", action: "create", format: "json", account_id: Account.default.id.to_s },
                           { enable_sis_reactivation: "1",
                             user: { name: "Test User", skip_registration: true },
-                            pseudonym: { unique_id: "test@example.com", ***REMOVED***, sis_user_id: "12345" },
+                            pseudonym: { unique_id: "test@example.com", password: "password123", sis_user_id: "12345" },
                             communication_channel: { skip_confirmation: true } })
 
           expect(other_user).to eq User.find(json["id"])
@@ -1889,7 +1889,7 @@ describe "Users API", type: :request do
                    { controller: "users", action: "create", format: "json", account_id: Account.default.id.to_s },
                    { enable_sis_reactivation: "1",
                      user: { name: "Test User" },
-                     pseudonym: { unique_id: "test@example.com", ***REMOVED***, sis_user_id: "12345" }, },
+                     pseudonym: { unique_id: "test@example.com", password: "password123", sis_user_id: "12345" }, },
                    {},
                    { expected_status: 400 })
         end
@@ -1900,7 +1900,7 @@ describe "Users API", type: :request do
                           { controller: "users", action: "create", format: "json", account_id: Account.default.id.to_s },
                           { enable_sis_reactivation: "1",
                             user: { name: "Test User" },
-                            pseudonym: { unique_id: "test@example.com", ***REMOVED***, sis_user_id: "12345" }, })
+                            pseudonym: { unique_id: "test@example.com", password: "password123", sis_user_id: "12345" }, })
 
           user = User.find(json["id"])
           expect(user.pseudonym.sis_user_id).to eq "12345"
@@ -1918,7 +1918,7 @@ describe "Users API", type: :request do
           json = api_call(:post,
                           "/api/v1/accounts/#{@other_account.id}/users",
                           { controller: "users", action: "create", format: "json", account_id: @other_account.id.to_s },
-                          { user: { name: "Test User" }, pseudonym: { unique_id: "test@example.com", ***REMOVED*** } })
+                          { user: { name: "Test User" }, pseudonym: { unique_id: "test@example.com", password: "password123" } })
           new_user = User.find(json["id"])
           expect(new_user.shard).to eq @shard1
           expect(new_user.pseudonym.account).to eq @other_account
@@ -1958,7 +1958,7 @@ describe "Users API", type: :request do
                    },
                    pseudonym: {
                      unique_id: "test@example.com",
-                     ***REMOVED***,
+                     password: "password123",
                      sis_user_id: "12345",
                      send_confirmation: 0,
                      authentication_provider_id: "facebook"
@@ -2050,7 +2050,7 @@ describe "Users API", type: :request do
                  },
                  pseudonym: {
                    unique_id: "test@example.com",
-                   ***REMOVED***,
+                   password: "password123",
                    send_confirmation: 1
                  }
                })
@@ -2062,7 +2062,7 @@ describe "Users API", type: :request do
                    { controller: "users", action: "create", format: "json", account_id: @admin.account.id.to_s },
                    {
                      user: { name: "Test User" },
-                     pseudonym: { ***REMOVED*** }
+                     pseudonym: { password: "password123" }
                    })
       assert_status(400)
       errors = JSON.parse(response.body)["errors"]
@@ -2083,7 +2083,7 @@ describe "Users API", type: :request do
                  },
                  pseudonym: {
                    unique_id: "test",
-                   ***REMOVED***
+                   password: "password123"
                  },
                  communication_channel: {
                    address: "test@example.com"
@@ -2162,7 +2162,7 @@ describe "Users API", type: :request do
                        account_id: @admin.account.id.to_s },
                      {
                        user: { name: "Test User", terms_of_use: "1" },
-                       pseudonym: { ***REMOVED*** }
+                       pseudonym: { password: "password123" }
                      })
         assert_status(400)
         errors = JSON.parse(response.body)["errors"]
@@ -2182,7 +2182,7 @@ describe "Users API", type: :request do
                    user: { name: "Test User", terms_of_use: "1" },
                    pseudonym: {
                      unique_id: "test@test.com",
-                     ***REMOVED***
+                     password: "password123"
                    },
                    communication_channel: {
                      address: "test@example.com"

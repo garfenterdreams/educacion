@@ -25,7 +25,7 @@ describe "user asset accesses" do
     Setting.set("enable_page_views", "db")
 
     username = "nobody@example.com"
-    ***REMOVED***
+    password = "asdfasdf"
     u = user_with_pseudonym(active_user: true,
                             username:,
                             password:)

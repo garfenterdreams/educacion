@@ -113,7 +113,7 @@ module LoginAndSessionMethods
   # don't use this unless you are actually testing the login/logout
   # process; instead prefer create_session or the various *_logged_in
   # methods above
-  def login_as(username = "nobody@example.com", ***REMOVED***)
+  def login_as(username = "nobody@example.com", password = "asdfasdf")
     if Onceler.recording
       raise "don't use real logins with once-ler, since a session cookie could be valid across specs if the pseudonym is shared"
     end

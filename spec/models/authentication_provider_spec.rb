@@ -38,7 +38,7 @@ describe AuthenticationProvider do
       c = AuthenticationProvider.new
       c.auth_password = "asdf"
       expect(c.auth_decrypted_password).to eql("asdf")
-      c.auth_***REMOVED***waegawe-,v-3o7fya23oya2o3"
+      c.auth_password = "2t87aot72gho8a37gh4g[awg'waegawe-,v-3o7fya23oya2o3"
       expect(c.auth_decrypted_password).to eql("2t87aot72gho8a37gh4g[awg'waegawe-,v-3o7fya23oya2o3")
     end
   end

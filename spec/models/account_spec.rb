@@ -467,7 +467,7 @@ describe Account do
       a = Account.new
       a.turnitin_shared_secret = "asdf"
       expect(a.turnitin_shared_secret).to eql("asdf")
-      a.turnitin_shared_***REMOVED***waegawe-,v-3o7fya23oya2o3"
+      a.turnitin_shared_secret = "2t87aot72gho8a37gh4g[awg'waegawe-,v-3o7fya23oya2o3"
       expect(a.turnitin_shared_secret).to eql("2t87aot72gho8a37gh4g[awg'waegawe-,v-3o7fya23oya2o3")
     end
   end

@@ -103,8 +103,8 @@ describe AuditLogFieldExtension::Logger do
   end
 
   it "sanitizes arguments" do
-    logger = AuditLogFieldExtension::Logger.new(mutation, {}, { input: { ***REMOVED*** } })
-    expect(logger.instance_variable_get(:@params)).to eq({ ***REMOVED*** })
+    logger = AuditLogFieldExtension::Logger.new(mutation, {}, { input: { password: "TOP SECRET" } })
+    expect(logger.instance_variable_get(:@params)).to eq({ password: "[FILTERED]" })
   end
 
   it "truncates long text" do

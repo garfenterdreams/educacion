@@ -24,14 +24,14 @@ describe "one time passwords" do
   before do
     Account.default.settings[:mfa_settings] = :required
     Account.default.save!
-    user_with_pseudonym(active_all: 1, ***REMOVED***)
+    user_with_pseudonym(active_all: 1, password: "qwertyuiop")
     @user.otp_secret_key = ROTP::Base32.random
     @user.save!
   end
 
   context "mid-login" do
     before do
-      post "/login/canvas", params: { pseudonym_session: { unique_id: @pseudonym.unique_id, ***REMOVED*** } }
+      post "/login/canvas", params: { pseudonym_session: { unique_id: @pseudonym.unique_id, password: "qwertyuiop" } }
     end
 
     it "redirects" do

@@ -29,7 +29,7 @@ describe IncomingMailProcessor::Pop3Mailbox do
       ssl: false,
       port: 2345,
       username: "user",
-      ***REMOVED***,
+      password: "password",
     }
   end
 
@@ -49,7 +49,7 @@ describe IncomingMailProcessor::Pop3Mailbox do
                                                           port: 1234,
                                                           ssl: "truthy-value",
                                                           username: "user@server.com",
-                                                          ***REMOVED***,
+                                                          password: "secret-user-password",
                                                         })
 
       expect(@mailbox.server).to eql "pop3.server.com"

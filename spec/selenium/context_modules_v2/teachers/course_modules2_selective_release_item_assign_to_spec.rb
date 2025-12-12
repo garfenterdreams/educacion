@@ -50,7 +50,7 @@ describe "selective_release module item assign to tray", :ignore_js_errors do
     @course.context_external_tools.create!(
       name: "Quizzes.Next",
       consumer_key: "test_key",
-      shared_***REMOVED***,
+      shared_secret: "test_secret",
       tool_id: "Quizzes 2",
       url: "http://example.com/launch"
     )
@@ -952,7 +952,7 @@ describe "selective_release module item assign to tray", :ignore_js_errors do
       @course.context_external_tools.create!(
         name: "Quizzes.Next",
         consumer_key: "test_key",
-        shared_***REMOVED***,
+        shared_secret: "test_secret",
         tool_id: "Quizzes 2",
         url: "http://example.com/launch"
       )
@@ -985,7 +985,7 @@ describe "selective_release module item assign to tray", :ignore_js_errors do
   #     @subject_course.context_external_tools.create!(
   #       name: "Quizzes.Next",
   #       consumer_key: "test_key",
-  #       shared_***REMOVED***,
+  #       shared_secret: "test_secret",
   #       tool_id: "Quizzes 2",
   #       url: "http://example.com/launch"
   #     )

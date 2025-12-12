@@ -731,12 +731,12 @@ describe UsersController do
           course_factory(active_all: true)
           @course.update_attribute(:self_enrollment, true)
 
-          post "create", params: { pseudonym: { unique_id: "jane@example.com", ***REMOVED***, password_confirmation: "lolwut12" }, user: { name: "Jane Student", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code, initial_enrollment_type: "student" }, pseudonym_type: "username", self_enrollment: "1" }, format: "json"
+          post "create", params: { pseudonym: { unique_id: "jane@example.com", password: "lolwut12", password_confirmation: "lolwut12" }, user: { name: "Jane Student", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code, initial_enrollment_type: "student" }, pseudonym_type: "username", self_enrollment: "1" }, format: "json"
           assert_forbidden
         end
 
         it "allows observers to self register" do
-          user_with_pseudonym(active_all: true, ***REMOVED***)
+          user_with_pseudonym(active_all: true, password: "lolwut12")
           course_with_student(user: @user, active_all: true)
           pairing_code = @student.generate_observer_pairing_code
 
@@ -764,7 +764,7 @@ describe UsersController do
                params: {
                  pseudonym: {
                    unique_id: "jon@example.com",
-                   ***REMOVED***,
+                   password: "password",
                    password_confirmation: "password"
                  },
                  user: {
@@ -798,7 +798,7 @@ describe UsersController do
                params: {
                  pseudonym: {
                    unique_id: "jon@example.com",
-                   ***REMOVED***,
+                   password: "password",
                    password_confirmation: "password"
                  },
                  user: {
@@ -840,7 +840,7 @@ describe UsersController do
                params: {
                  pseudonym: {
                    unique_id: "jon@example.com",
-                   ***REMOVED***,
+                   password: "password",
                    password_confirmation: "password"
                  },
                  user: {
@@ -1022,14 +1022,14 @@ describe UsersController do
       end
 
       it "validates the self enrollment code" do
-        post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", ***REMOVED***, password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: "omg ... not valid", initial_enrollment_type: "student" }, self_enrollment: "1" }
+        post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", password: "asdfasdf", password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: "omg ... not valid", initial_enrollment_type: "student" }, self_enrollment: "1" }
         assert_status(400)
         json = response.parsed_body
         expect(json["errors"]["user"]["self_enrollment_code"]).to be_present
       end
 
       it "ignores the password if not self enrolling" do
-        post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", ***REMOVED***, password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", initial_enrollment_type: "student" } }
+        post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", password: "asdfasdf", password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", initial_enrollment_type: "student" } }
         expect(response).to be_successful
         u = User.where(name: "Jacob Fugal").first
         expect(u).to be_pre_registered
@@ -1044,12 +1044,12 @@ describe UsersController do
         end
 
         it "strips the self enrollment code before validation" do
-          post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", ***REMOVED***, password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code + " ", initial_enrollment_type: "student" }, self_enrollment: "1" }
+          post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", password: "asdfasdf", password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code + " ", initial_enrollment_type: "student" }, self_enrollment: "1" }
           expect(response).to be_successful
         end
 
         it "sets root_account_ids" do
-          post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", ***REMOVED***, password_confirmation: "asdfasdf" },
+          post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", password: "asdfasdf", password_confirmation: "asdfasdf" },
                                    user: { name: "happy gilmore", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code + " ", initial_enrollment_type: "student" },
                                    self_enrollment: "1" }
           expect(response).to be_successful
@@ -1058,7 +1058,7 @@ describe UsersController do
         end
 
         it "ignores the password if self enrolling with an email pseudonym" do
-          post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", ***REMOVED***, password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code, initial_enrollment_type: "student" }, pseudonym_type: "email", self_enrollment: "1" }
+          post "create", params: { pseudonym: { unique_id: "jacob@instructure.com", password: "asdfasdf", password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code, initial_enrollment_type: "student" }, pseudonym_type: "email", self_enrollment: "1" }
           expect(response).to be_successful
           u = User.where(name: "Jacob Fugal").first
           expect(u).to be_pre_registered
@@ -1074,7 +1074,7 @@ describe UsersController do
         end
 
         it "auto-registers the user if self enrolling" do
-          post "create", params: { pseudonym: { unique_id: "jacob", ***REMOVED***, password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code, initial_enrollment_type: "student" }, pseudonym_type: "username", self_enrollment: "1" }
+          post "create", params: { pseudonym: { unique_id: "jacob", password: "asdfasdf", password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal", terms_of_use: "1", self_enrollment_code: @course.self_enrollment_code, initial_enrollment_type: "student" }, pseudonym_type: "username", self_enrollment: "1" }
           expect(response).to be_successful
           u = User.where(name: "Jacob Fugal").first
           expect(@course.students).to include(u)
@@ -1084,7 +1084,7 @@ describe UsersController do
       end
 
       it "links the user to the observee" do
-        user = user_with_pseudonym(active_all: true, ***REMOVED***)
+        user = user_with_pseudonym(active_all: true, password: "lolwut12")
         pairing_code = user.generate_observer_pairing_code
 
         post "create", params: { pseudonym: { unique_id: "jacob@instructure.com" }, pairing_code: { code: pairing_code.code }, user: { name: "Jacob Fugal", terms_of_use: "1", initial_enrollment_type: "observer" } }
@@ -1155,7 +1155,7 @@ describe UsersController do
         end
 
         it "allows setting a password" do
-          post "create", params: { account_id: account.id, pseudonym: { unique_id: "jacob@instructure.com", ***REMOVED***, password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal" } }
+          post "create", params: { account_id: account.id, pseudonym: { unique_id: "jacob@instructure.com", password: "asdfasdf", password_confirmation: "asdfasdf" }, user: { name: "Jacob Fugal" } }
           u = User.where(name: "Jacob Fugal").first
           expect(u).to be_present
           expect(u.pseudonym).not_to be_password_auto_generated
@@ -1166,7 +1166,7 @@ describe UsersController do
           post "create", params: { account_id: account.id,
                                    pseudonym: {
                                      unique_id: "jacob@instructure.com",
-                                     ***REMOVED***,
+                                     password: "asdfasdf",
                                      password_confirmation: "asdfasdf",
                                      force_self_registration: "1",
                                    },
@@ -3592,7 +3592,7 @@ describe UsersController do
     end
 
     let(:user) do
-      user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+      user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
       @user
     end
     let(:developer_key) { DeveloperKey.create!(name: "dev key") }

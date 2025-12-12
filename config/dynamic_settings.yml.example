@@ -175,11 +175,11 @@ development:
       #       redwood: "https://redwood-api-dev.domain-svcs.nonprod.inseng.io"
       #       upload: "https://instructure-uploads-pdx-cd.s3.us-west-2.amazonaws.com"
       #     hotglue:
-      #       ***REMOVED***
+      #       api_key: "gFd34vgi2D5OY8RrNInl55wDY1ixqSvxZsSHf965"
       #       env_id: "demo.hg.instructure.com"
       #       flow_id: "NsN76D10s"
       #     pendo:
-      #       ***REMOVED***
+      #       api_key: "f5faad90-a2af-4bf9-6f7b-862e00100be4"
       #     sentry:
       #       learner_dsn: "https://4c2589d43fafee7da8e0896a8667cfcb@relay-pdx.sentry.insops.net/486"
       #       learning_provider_dsn: "https://feb64e6e836b324f39dd9c499a9d3a47@relay-pdx.sentry.insops.net/530"

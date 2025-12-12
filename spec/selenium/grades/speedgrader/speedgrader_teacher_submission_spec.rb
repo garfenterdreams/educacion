@@ -42,7 +42,7 @@ describe "SpeedGrader submissions" do
       # create initial data for second student
       @student_2 = User.create!(name: "student 2")
       @student_2.register
-      @student_2.pseudonyms.create!(unique_id: "student2@example.com", ***REMOVED***, password_confirmation: "qwertyuiop")
+      @student_2.pseudonyms.create!(unique_id: "student2@example.com", password: "qwertyuiop", password_confirmation: "qwertyuiop")
       @course.enroll_user(@student_2, "StudentEnrollment", enrollment_state: "active")
       @submission_2 = @assignment.submit_homework(@student_2, body: "second student submission text")
 
@@ -90,7 +90,7 @@ describe "SpeedGrader submissions" do
       # a student without a submission
       @student_2 = User.create!(name: "student 2")
       @student_2.register
-      @student_2.pseudonyms.create!(unique_id: "student2@example.com", ***REMOVED***, password_confirmation: "qwertyuiop")
+      @student_2.pseudonyms.create!(unique_id: "student2@example.com", password: "qwertyuiop", password_confirmation: "qwertyuiop")
       @course.enroll_user(@student_2, "StudentEnrollment", enrollment_state: "active")
 
       get "/courses/#{@course.id}/gradebook/speed_grader?assignment_id=#{@assignment.id}"
@@ -127,7 +127,7 @@ describe "SpeedGrader submissions" do
     end
 
     it "displays no submission message if student does not make a submission", priority: "1" do
-      @student = user_with_pseudonym(active_user: true, username: "student@example.com", ***REMOVED***)
+      @student = user_with_pseudonym(active_user: true, username: "student@example.com", password: "qwertyuiop")
       @course.enroll_user(@student, "StudentEnrollment", enrollment_state: "active")
 
       get "/courses/#{@course.id}/gradebook/speed_grader?assignment_id=#{@assignment.id}"
@@ -359,7 +359,7 @@ describe "SpeedGrader submissions" do
       end
 
       it "shows turnitin score for attached files", priority: "1" do
-        @user = user_with_pseudonym({ active_user: true, username: "student@example.com", ***REMOVED*** })
+        @user = user_with_pseudonym({ active_user: true, username: "student@example.com", password: "qwertyuiop" })
         attachment1 = @user.attachments.new filename: "homework1.doc"
         attachment1.content_type = "application/msword"
         attachment1.size = 10_093

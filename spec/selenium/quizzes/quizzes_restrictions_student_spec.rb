@@ -33,7 +33,7 @@ describe "quiz restrictions as a student" do
   context "restrict access code" do
     before do
       course_with_student_logged_in
-      @***REMOVED***
+      @password = "threepwood"
       @quiz = course_quiz(true)
       @quiz.publish!
       @quiz.access_code = @password

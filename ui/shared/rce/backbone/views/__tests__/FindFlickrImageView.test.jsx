@@ -53,7 +53,7 @@ const photoData = [
   },
   {
     id: 'nsfwid',
-    ***REMOVED***,
+    secret: 'nsfwsecret',
     farm: 'nsfwfarm',
     owner: 'nsfwowner',
     server: 'nsfwserver',

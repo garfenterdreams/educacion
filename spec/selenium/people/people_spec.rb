@@ -70,7 +70,7 @@ describe "people" do
   def create_user(student_name)
     user = User.create!(name: student_name)
     user.register!
-    user.pseudonyms.create!(unique_id: student_name, ***REMOVED***, password_confirmation: "qwertyuiop")
+    user.pseudonyms.create!(unique_id: student_name, password: "qwertyuiop", password_confirmation: "qwertyuiop")
     @course.reload
     user
   end
@@ -424,7 +424,7 @@ describe "people" do
 
           @users.each do |info|
             user = User.create!(name: info[:name])
-            user.pseudonyms.create!(unique_id: "#{info[:name]}@example.com", ***REMOVED***, password_confirmation: "fakepassword", sis_user_id: "#{info[:name]}_sis_id")
+            user.pseudonyms.create!(unique_id: "#{info[:name]}@example.com", password: "fakepassword", password_confirmation: "fakepassword", sis_user_id: "#{info[:name]}_sis_id")
             enrollment = @course.enroll_user(user, info[:role], section: info[:section])
             enrollment.workflow_state = "active"
             enrollment.last_activity_at = info[:last_activity]

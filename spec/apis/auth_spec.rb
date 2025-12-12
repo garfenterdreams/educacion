@@ -49,7 +49,7 @@ describe "API Authentication", type: :request do
 
     describe "session authentication" do
       before :once do
-        user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+        user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
         course_with_teacher(user: @user)
       end
 
@@ -90,7 +90,7 @@ describe "API Authentication", type: :request do
 
     describe "basic authentication" do
       before :once do
-        user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+        user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
         course_with_teacher(user: @user)
       end
 
@@ -104,7 +104,7 @@ describe "API Authentication", type: :request do
     describe "oauth2 native app flow" do
       def flow
         enable_forgery_protection do
-          user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+          user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
           course_with_teacher(user: @user)
 
           # step 1
@@ -164,8 +164,8 @@ describe "API Authentication", type: :request do
       end
 
       it "does not prepend the csrf protection even if the post has a session" do
-        user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
-        post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", ***REMOVED*** } }
+        user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
+        post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", password: "test1234" } }
         code = SecureRandom.hex(64)
         code_data = { "user" => @user.id, "client_id" => @client_id }
         Canvas.redis.setex("oauth2:#{code}", 1.day, code_data.to_json)
@@ -180,7 +180,7 @@ describe "API Authentication", type: :request do
           follow_redirect!
           expect(response).to redirect_to(canvas_login_url)
           allow_any_instance_of(Account).to receive(:trusted_referer?).and_return(true)
-          post canvas_login_url, params: { pseudonym_session: { unique_id: "test1@example.com", ***REMOVED*** } }
+          post canvas_login_url, params: { pseudonym_session: { unique_id: "test1@example.com", password: "test1234" } }
         end
       end
 
@@ -274,10 +274,10 @@ describe "API Authentication", type: :request do
         follow_redirect!
         expect(response).to be_successful
 
-        user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+        user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
         course_with_teacher(user: @user)
         allow_any_instance_of(Account).to receive(:trusted_referer?).and_return(true)
-        post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", ***REMOVED*** } }
+        post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", password: "test1234" } }
 
         # step 2
         expect(response).to be_redirect
@@ -307,7 +307,7 @@ describe "API Authentication", type: :request do
         specs_require_sharding
 
         it "creates the access token on the same shard as the user" do
-          user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+          user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
 
           @shard1.activate do
             account = Account.create!
@@ -323,7 +323,7 @@ describe "API Authentication", type: :request do
             follow_redirect!
             expect(response).to be_successful
             allow_any_instance_of(Account).to receive(:trusted_referer?).and_return(true)
-            post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", ***REMOVED*** } }
+            post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", password: "test1234" } }
 
             # step 3
             expect(response).to be_redirect
@@ -375,7 +375,7 @@ describe "API Authentication", type: :request do
         def login_and_confirm(create_token = false)
           enable_forgery_protection do
             enable_cache do
-              user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+              user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
               course_with_teacher(user: @user)
               @key.update_attribute :redirect_uri, "http://www.example.com/oauth2response"
               if create_token
@@ -390,7 +390,7 @@ describe "API Authentication", type: :request do
               follow_redirect!
               expect(response).to be_successful
               allow_any_instance_of(Account).to receive(:trusted_referer?).and_return(true)
-              post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", ***REMOVED*** } }
+              post "/login/canvas", params: { pseudonym_session: { unique_id: "test1@example.com", password: "test1234" } }
 
               expect(response).to be_redirect
               expect(response["Location"]).to match(%r{/login/oauth2/confirm$})
@@ -439,7 +439,7 @@ describe "API Authentication", type: :request do
         it "does not allow an account level dev key to auth with other account's user" do
           enable_forgery_protection do
             enable_cache do
-              user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+              user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
               course_with_teacher(user: @user)
 
               # create the dev key on a different account
@@ -467,7 +467,7 @@ describe "API Authentication", type: :request do
 
           enable_forgery_protection do
             enable_cache do
-              user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+              user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
               course_with_teacher_logged_in(user: @user)
               @key.update_attribute :redirect_uri, "http://www.example.com/oauth2response"
               if create_token
@@ -597,7 +597,7 @@ describe "API Authentication", type: :request do
       user_params = {
         active_user: true,
         username: "test1@example.com",
-        ***REMOVED***
+        password: "test1234"
       }
       user_obj = user_with_pseudonym(user_params)
       course_with_teacher(user: user_obj)
@@ -675,7 +675,7 @@ describe "API Authentication", type: :request do
 
   describe "access token" do
     before :once do
-      user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***)
+      user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234")
       course_with_teacher(user: @user)
       @token = @user.access_tokens.create!(developer_key: @key)
     end
@@ -797,7 +797,7 @@ describe "API Authentication", type: :request do
       it "allows a token previously linked to a dev key same account to work" do
         enable_forgery_protection do
           enable_cache do
-            user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***, account: @account)
+            user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234", account: @account)
             course_with_teacher(user: @user, account: @account)
             developer_key = DeveloperKey.create!(name: "test_key_#{SecureRandom.hex(4)}", account: @account, redirect_uri: "http://www.example.com/my_uri")
             enable_developer_key_account_binding!(developer_key)
@@ -813,7 +813,7 @@ describe "API Authentication", type: :request do
       it "allows a token previously linked to a dev key allowed sub account to work" do
         enable_forgery_protection do
           enable_cache do
-            user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***, account: @sub_account1)
+            user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234", account: @sub_account1)
             course_with_teacher(user: @user, account: @sub_account1)
             developer_key = DeveloperKey.create!(name: "test_key_#{SecureRandom.hex(4)}", account: @account, redirect_uri: "http://www.example.com/my_uri")
             enable_developer_key_account_binding!(developer_key)
@@ -829,7 +829,7 @@ describe "API Authentication", type: :request do
       it "does not allow a token previously linked to a dev key on foreign account to work" do
         enable_forgery_protection do
           enable_cache do
-            user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***, account: @account)
+            user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234", account: @account)
             course_with_teacher(user: @user, account: @account)
             developer_key = DeveloperKey.create!(name: "test_key_#{SecureRandom.hex(4)}", account: @not_sub_account, redirect_uri: "http://www.example.com/my_uri")
             @token = @user.access_tokens.create!(developer_key:)
@@ -849,7 +849,7 @@ describe "API Authentication", type: :request do
         @shard1.activate do
           @account = Account.create!
           enable_default_developer_key!
-          user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***, account: @account)
+          user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234", account: @account)
           course_with_teacher(user: @user, account: @account)
           @token = @user.access_tokens.create!(developer_key: DeveloperKey.default, purpose: "test")
           expect(@token.developer_key.shard).to be_default
@@ -862,7 +862,7 @@ describe "API Authentication", type: :request do
 
       it "does not work for an access token from the default shard with the developer key on the different shard" do
         @account = Account.create!
-        user_with_pseudonym(active_user: true, username: "test1@example.com", ***REMOVED***, account: @account)
+        user_with_pseudonym(active_user: true, username: "test1@example.com", password: "test1234", account: @account)
         course_with_teacher(user: @user, account: @account)
 
         @shard1.activate do

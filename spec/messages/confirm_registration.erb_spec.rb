@@ -32,7 +32,7 @@ describe "confirm_registration" do
   context "with_pseudonym" do
     before :once do
       @pseudonym = @user.pseudonyms.create!(unique_id: "unique@example.com",
-                                            ***REMOVED***,
+                                            password: "password",
                                             password_confirmation: "password")
     end
 

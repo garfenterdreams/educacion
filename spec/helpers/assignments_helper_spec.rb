@@ -95,7 +95,7 @@ describe AssignmentsHelper do
       @context = @assignment.context
       account = @context.account
       account.turnitin_account_id = 12_345
-      account.turnitin_shared_***REMOVED***
+      account.turnitin_shared_secret = "the same combination on my luggage"
       account.settings[:enable_turnitin] = true
       account.save!
     end

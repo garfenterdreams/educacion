@@ -51,7 +51,7 @@ describe Api::V1::Plugin do
                           shhh_dec: "decrypted",
                           shhh_salt: "salted",
                           tell_no_one: "another secret",
-                          keep_it_***REMOVED***,
+                          keep_it_secret: "keep it safe",
                         })
     end
 

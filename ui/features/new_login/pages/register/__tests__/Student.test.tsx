@@ -238,7 +238,7 @@ describe('Student', () => {
         expect(createStudentAccount).toHaveBeenCalledWith({
           name: 'Student User',
           username: 'studentusername',
-          ***REMOVED***,
+          password: 'ValidPassword123!',
           confirmPassword: 'ValidPassword123!',
           joinCode: 'JOIN123',
           captchaToken: undefined,

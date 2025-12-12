@@ -80,7 +80,7 @@ describe Canvas::Security::PasswordPolicy do
     it "validates confirmation matches" do
       pseudonym_with_policy({})
 
-      @pseudonym.***REMOVED***
+      @pseudonym.password = "abcdefgh"
       expect(@pseudonym).not_to be_valid
     end
 

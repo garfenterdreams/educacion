@@ -216,13 +216,13 @@ describe "login" do
   end
 
   it "redirects back for jobs controller" do
-    user_with_pseudonym(***REMOVED***, active_all: 1)
+    user_with_pseudonym(password: "qwertyuiop", active_all: 1)
     Account.site_admin.account_users.create!(user: @user)
 
     get jobs_url
     expect(response).to redirect_to login_url
 
-    post canvas_login_url, params: { pseudonym_session: { unique_id: @pseudonym.unique_id, ***REMOVED*** } }
+    post canvas_login_url, params: { pseudonym_session: { unique_id: @pseudonym.unique_id, password: "qwertyuiop" } }
     expect(response).to redirect_to jobs_url
   end
 end

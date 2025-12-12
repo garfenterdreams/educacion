@@ -27,7 +27,7 @@ describe LearnPlatform::GlobalApi do
       let(:fake_secrets) do
         {
           service_name: "interop",
-          service_***REMOVED***,
+          service_secret: "test_secret",
         }.with_indifferent_access
       end
 
@@ -57,7 +57,7 @@ describe LearnPlatform::GlobalApi do
     let(:fake_secrets) do
       {
         service_name: "interop",
-        service_***REMOVED***,
+        service_secret: "test_secret",
         learn_platform_basic_token: "basic_auth_token"
       }.with_indifferent_access
     end
@@ -217,7 +217,7 @@ describe LearnPlatform::GlobalApi do
     let(:fake_secrets) do
       {
         service_name: "interop",
-        service_***REMOVED***,
+        service_secret: "test_secret",
       }.with_indifferent_access
     end
 
@@ -307,7 +307,7 @@ describe LearnPlatform::GlobalApi do
     let(:fake_secrets) do
       {
         service_name: "interop",
-        service_***REMOVED***,
+        service_secret: "test_secret",
       }.with_indifferent_access
     end
 
@@ -435,7 +435,7 @@ describe LearnPlatform::GlobalApi do
     let(:fake_secrets) do
       {
         service_name: "interop",
-        service_***REMOVED***,
+        service_secret: "test_secret",
       }.with_indifferent_access
     end
     let(:endpoint) { "https://fakelearnplatform.instructure.com" }
@@ -571,7 +571,7 @@ describe LearnPlatform::GlobalApi do
     include WebMock::API
 
     before do
-      allow(described_class).to receive_messages(credentials: { service_name: "interop", service_***REMOVED*** }, endpoint: "https://fakelearnplatform.instructure.com")
+      allow(described_class).to receive_messages(credentials: { service_name: "interop", service_secret: "test_secret" }, endpoint: "https://fakelearnplatform.instructure.com")
     end
 
     let(:callback_url) do

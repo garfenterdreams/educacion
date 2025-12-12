@@ -193,7 +193,7 @@ module GradebookCommon
     @student_1_total_treating_ungraded_as_zeros = "18.75%"
     @student_2_total_treating_ungraded_as_zeros = "12.5%"
     @student_3_total_treating_ungraded_as_zeros = "12.5%"
-    @default_***REMOVED***
+    @default_password = "qwertyuiop"
   end
 
   def assignment_setup(opts = {})

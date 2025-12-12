@@ -73,7 +73,7 @@ shared_examples_for "statistics basic tests" do
     course = Course.create!(name: "new course", account:)
     course.offer!
     student = user_factory(active_user: true)
-    pseudonym = student.pseudonyms.create!(unique_id: "student@example.com", ***REMOVED***, password_confirmation: "asdfasdf")
+    pseudonym = student.pseudonyms.create!(unique_id: "student@example.com", password: "asdfasdf", password_confirmation: "asdfasdf")
     course.enroll_user(student, "StudentEnrollment").accept!
     login_as(pseudonym.unique_id, "asdfasdf")
     admin_logged_in

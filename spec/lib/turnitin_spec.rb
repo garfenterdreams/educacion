@@ -335,7 +335,7 @@ describe Turnitin::Client do
     # 1000011200310311john.doe@myschool.eduJohnDoejohn1232hothouse123
     it "follows the turnitin documentation way of generating the md5" do
       doc_sample_account_id = "100"
-      doc_sample_shared_***REMOVED***
+      doc_sample_shared_secret = "hothouse123"
       doc_sample_params = {
         gmtime: "200310311",
         fid: "1",

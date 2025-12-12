@@ -43,7 +43,7 @@ if [ ! -f "$INIT_FLAG" ]; then
         user = User.create!(name: 'Admin')
         user.pseudonyms.create!(
           unique_id: 'admin@garfenter.com',
-          ***REMOVED***,
+          password: 'GarfenterAdmin2024',
           password_confirmation: 'GarfenterAdmin2024',
           account: account
         )

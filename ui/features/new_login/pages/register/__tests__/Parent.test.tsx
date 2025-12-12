@@ -208,7 +208,7 @@ describe('Parent', () => {
       await waitFor(() => {
         expect(createParentAccount).toHaveBeenCalledWith({
           email: 'parent@example.com',
-          ***REMOVED***,
+          password: 'ValidPassword123!',
           confirmPassword: 'ValidPassword123!',
           name: 'Parent User',
           pairingCode: 'PAIR123',

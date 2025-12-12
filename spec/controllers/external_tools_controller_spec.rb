@@ -228,8 +228,8 @@ describe ExternalToolsController do
     context "with selectable: true" do
       subject { get :index, params: { course_id: @course.id, selectable: true }, format: "json" }
 
-      let(:selectable_tool) { @course.context_external_tools.create!(name: "selectable_tool", consumer_key: "selectable_tool", shared_***REMOVED***, url: "https://example.com/launch") }
-      let(:non_selectable_tool) { @course.context_external_tools.create!(name: "non_selectable_tool", consumer_key: "non_selectable_tool", shared_***REMOVED***, url: "https://example.com/launch", not_selectable: true) }
+      let(:selectable_tool) { @course.context_external_tools.create!(name: "selectable_tool", consumer_key: "selectable_tool", shared_secret: "selectable_tool", url: "https://example.com/launch") }
+      let(:non_selectable_tool) { @course.context_external_tools.create!(name: "non_selectable_tool", consumer_key: "non_selectable_tool", shared_secret: "non_selectable_tool", url: "https://example.com/launch", not_selectable: true) }
 
       before do
         selectable_tool
@@ -1719,7 +1719,7 @@ describe ExternalToolsController do
                                                  url: "http://example.com/launch",
                                                  domain: "example.com",
                                                  consumer_key: "test_key",
-                                                 shared_***REMOVED***,
+                                                 shared_secret: "test_secret",
                                                  privacy_level: "public",
                                                  tool_id: "Quizzes 2"
                                                })
@@ -1915,7 +1915,7 @@ describe ExternalToolsController do
                                                  url: "http://example.com/launch",
                                                  domain: "example.com",
                                                  consumer_key: "test_key",
-                                                 shared_***REMOVED***,
+                                                 shared_secret: "test_secret",
                                                  privacy_level: "public",
                                                  settings: {
                                                    custom_fields: { "canvas_assignment_due_at" => "$Canvas.assignment.dueAt.iso8601" }

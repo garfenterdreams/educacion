@@ -46,7 +46,7 @@ describe MicrosoftSync::LoginService do
         allow(InstStatsd::Statsd).to receive(:increment)
         allow(Rails.application.credentials).to receive(:microsoft_sync).and_return({
                                                                                       client_id: "theclientid",
-                                                                                      client_***REMOVED***
+                                                                                      client_secret: "thesecret"
                                                                                     })
       end
 
@@ -59,7 +59,7 @@ describe MicrosoftSync::LoginService do
               scope: "https://graph.microsoft.com/.default",
               grant_type: "client_credentials",
               client_id: "theclientid",
-              client_***REMOVED***
+              client_secret: "thesecret"
             }
           ).and_return(
             status: response_status,

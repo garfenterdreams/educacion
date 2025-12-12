@@ -83,7 +83,7 @@ def course_with_teacher_enrolled
   @teacher = @user
   @teacher.pseudonyms.create!(
     unique_id: "newteacher#{@teacher.id}@example.com",
-    ***REMOVED***,
+    password: "password",
     password_confirmation: "password"
   )
   @teacher.email = "newteacher#{@teacher.id}@example.com"
@@ -106,7 +106,7 @@ def course_with_students_enrolled
     email = "playstudent#{index}@example.com"
     @user.pseudonyms.create!(
       unique_id: email,
-      ***REMOVED***,
+      password: "password",
       password_confirmation: "password"
     )
     @user.email = email

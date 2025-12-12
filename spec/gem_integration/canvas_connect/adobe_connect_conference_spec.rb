@@ -23,7 +23,7 @@ describe AdobeConnectConference do
     {
       domain: "http://connect.example.com",
       username: "user",
-      ***REMOVED***,
+      password: "password",
       password_dec: "password",
       meeting_container: "canvas_meetings"
     }

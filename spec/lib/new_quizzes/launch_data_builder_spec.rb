@@ -237,7 +237,7 @@ module NewQuizzes
           context: account,
           opts: {
             url: "https://account.quiz-lti-dub-prod.instructure.com/lti/launch",
-            shared_***REMOVED***
+            shared_secret: "test-secret-key-123"
           }
         )
       end
@@ -369,7 +369,7 @@ module NewQuizzes
           provided_signature = Base64.strict_decode64(result[:signature])
 
           # Use wrong secret
-          wrong_***REMOVED***
+          wrong_secret = "wrong-secret-key"
           # Uses URL-encoded query-string format
           canonical_string = URI.encode_www_form(params.sort)
           expected_signature = OpenSSL::HMAC.digest("sha256", wrong_secret, canonical_string)

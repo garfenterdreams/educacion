@@ -225,7 +225,7 @@ describe Assignment do
         tool = @course.context_external_tools.create!(
           name: "Quizzes.Next",
           consumer_key: "test_key",
-          shared_***REMOVED***,
+          shared_secret: "test_secret",
           tool_id: "Quizzes 2",
           url: "http://example.com/launch"
         )

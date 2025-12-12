@@ -28,7 +28,7 @@ describe SisPseudonym do
     {
       account:,
       unique_id:,
-      ***REMOVED***,
+      password: "asdfasdf",
       password_confirmation: "asdfasdf"
     }
   end

@@ -46,7 +46,7 @@ describe('Auth Service', () => {
           authenticity_token: 'testCsrfToken',
           pseudonym_session: {
             unique_id: 'testUser',
-            ***REMOVED***,
+            password: 'testPassword',
             remember_me: '1',
           },
         },

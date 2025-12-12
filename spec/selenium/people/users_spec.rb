@@ -36,7 +36,7 @@ describe "users" do
       f(".add_pseudonym_link").click
       wait_for_ajaximations
       pseudonym_form = f("[aria-label='Add Login']")
-      ***REMOVED***
+      password = "qwertyuiop"
       pseudonym_form.find_element(:css, "[name='unique_id']").send_keys("new_user")
       pseudonym_form.find_element(:css, "[name='password']").send_keys(password)
       pseudonym_form.find_element(:css, "[name='password_confirmation']").send_keys(password)
@@ -124,7 +124,7 @@ describe "users" do
       course_with_admin_logged_in
       @student_1 = User.create!(name: "Student One")
       @student_1.register!
-      @student_1.pseudonyms.create!(unique_id: "studentr1_pseudonym1@example.com", ***REMOVED***, password_confirmation: "asdfasdf")
+      @student_1.pseudonyms.create!(unique_id: "studentr1_pseudonym1@example.com", password: "asdfasdf", password_confirmation: "asdfasdf")
       @student_1.communication_channels.create(path: "student1_cc@instructure.com").confirm!
       @common_course = @course
       @common_course.enroll_user(@student_1).accept!
@@ -132,7 +132,7 @@ describe "users" do
 
       @student_2 = User.create!(name: "Student Two")
       @student_2.register!
-      @student_2.pseudonyms.create!(unique_id: "student2_pseudonym@example.com", ***REMOVED***, password_confirmation: "asdfasdf")
+      @student_2.pseudonyms.create!(unique_id: "student2_pseudonym@example.com", password: "asdfasdf", password_confirmation: "asdfasdf")
       @student_2.communication_channels.create(path: "student2_cc@instructure.com").confirm!
       @common_course.enroll_user(@student_2).accept!
       course_with_student({ user: @student_2, active_course: true, active_enrollment: true })
@@ -291,7 +291,7 @@ describe "users" do
     it "registers an observer" do
       Account.default.terms_of_service&.update(passive: false)
 
-      user = user_with_pseudonym(active_all: true, ***REMOVED***)
+      user = user_with_pseudonym(active_all: true, password: "lolwut12")
       pairing_code = user.generate_observer_pairing_code
 
       get "/register"

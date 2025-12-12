@@ -213,7 +213,7 @@ describe ExternalToolsController, type: :request do
             tool = @course.context_external_tools.create!(
               name: "Example Tool",
               consumer_key: "fakefake",
-              shared_***REMOVED***,
+              shared_secret: "sofakefake",
               domain: "example.com"
             )
             assignment = assignment_model(
@@ -776,10 +776,10 @@ describe ExternalToolsController, type: :request do
 
   def search_call(context)
     type = context.class.table_name
-    2.times { |i| context.context_external_tools.create!(name: "first_#{i}", consumer_key: "fakefake", shared_***REMOVED***, url: "http://www.example.com/ims/lti") }
+    2.times { |i| context.context_external_tools.create!(name: "first_#{i}", consumer_key: "fakefake", shared_secret: "sofakefake", url: "http://www.example.com/ims/lti") }
     ids = context.context_external_tools.map(&:id)
 
-    2.times { |i| context.context_external_tools.create!(name: "second_#{i}", consumer_key: "fakefake", shared_***REMOVED***, url: "http://www.example.com/ims/lti") }
+    2.times { |i| context.context_external_tools.create!(name: "second_#{i}", consumer_key: "fakefake", shared_secret: "sofakefake", url: "http://www.example.com/ims/lti") }
 
     json = api_call(:get,
                     "/api/v1/#{type}/#{context.id}/external_tools.json?search_term=fir",
@@ -794,8 +794,8 @@ describe ExternalToolsController, type: :request do
 
   def only_selectables(context)
     type = context.class.table_name
-    context.context_external_tools.create!(name: "first", consumer_key: "fakefake", shared_***REMOVED***, url: "http://www.example.com/ims/lti", not_selectable: true)
-    not_selectable = context.context_external_tools.create!(name: "second", consumer_key: "fakefake", shared_***REMOVED***, url: "http://www.example.com/ims/lti")
+    context.context_external_tools.create!(name: "first", consumer_key: "fakefake", shared_secret: "sofakefake", url: "http://www.example.com/ims/lti", not_selectable: true)
+    not_selectable = context.context_external_tools.create!(name: "second", consumer_key: "fakefake", shared_secret: "sofakefake", url: "http://www.example.com/ims/lti")
 
     json = api_call(:get,
                     "/api/v1/#{type}/#{context.id}/external_tools.json?selectable=true",
@@ -825,7 +825,7 @@ describe ExternalToolsController, type: :request do
 
   def update_call(context, successful: true)
     type = context.class.table_name
-    et = context.context_external_tools.create!(name: "test", consumer_key: "fakefake", shared_***REMOVED***, url: "http://www.example.com/ims/lti", unified_tool_id: "utid_12345")
+    et = context.context_external_tools.create!(name: "test", consumer_key: "fakefake", shared_secret: "sofakefake", url: "http://www.example.com/ims/lti", unified_tool_id: "utid_12345")
 
     json = api_call(:put,
                     "/api/v1/#{type}/#{context.id}/external_tools/#{et.id}.json",
@@ -841,7 +841,7 @@ describe ExternalToolsController, type: :request do
 
   def destroy_call(context)
     type = context.class.table_name
-    et = context.context_external_tools.create!(name: "test", consumer_key: "fakefake", shared_***REMOVED***, domain: "example.com")
+    et = context.context_external_tools.create!(name: "test", consumer_key: "fakefake", shared_secret: "sofakefake", domain: "example.com")
     api_call(:delete,
              "/api/v1/#{type}/#{context.id}/external_tools/#{et.id}.json",
              { controller: "external_tools",
@@ -897,7 +897,7 @@ describe ExternalToolsController, type: :request do
 
   def paginate_call(context)
     type = context.class.table_name
-    7.times { |i| context.context_external_tools.create!(name: "test_#{i}", consumer_key: "fakefake", shared_***REMOVED***, url: "http://www.example.com/ims/lti") }
+    7.times { |i| context.context_external_tools.create!(name: "test_#{i}", consumer_key: "fakefake", shared_secret: "sofakefake", url: "http://www.example.com/ims/lti") }
     expect(context.context_external_tools.count).to eq 7
     json = api_call(:get,
                     "/api/v1/#{type}/#{context.id}/external_tools.json?per_page=3",

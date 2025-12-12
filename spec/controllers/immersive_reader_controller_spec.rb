@@ -47,7 +47,7 @@ describe ImmersiveReaderController do
       {
         tenant_id: "faketenantid",
         client_id: "fakeclientid",
-        client_***REMOVED***,
+        client_secret: "fakesecret",
         subdomain: "fakesub"
       }
     )
@@ -82,7 +82,7 @@ describe ImmersiveReaderController do
         {
           tenant_id: "faketenantid",
           client_id: "fakeclientid",
-          client_***REMOVED***,
+          client_secret: "fakesecret",
           subdomain: "fakesub"
         }
       )

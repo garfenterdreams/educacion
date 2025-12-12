@@ -22,7 +22,7 @@ paths:
         required: false
         schema:
           type: string
-        example: http://testexample.com?registration_token=***REMOVED***
+        example: http://testexample.com?registration_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNTE0OCwicm9vdF9hY2NvdW50X2dsb2JhbF9pZCI6MzEwMDAwMDAwMDA2ODQ1LCJleHAiOjE3MjA2NTgxODN9.-_a81YiTjDvvyNXuit244nvr5QIT2MqXwKdOdS2fN2s
       responses:
         '200':
           description: TBD
@@ -69,8 +69,8 @@ paths:
                 - token
               example:
                 uuid: fb73bfab-f741-4b30-b245-60892acb81a1
-                oidc_configuration_url: http://localhost/api/lti/security/openid-configuration?registration_token=***REMOVED***
-                token: ***REMOVED***
+                oidc_configuration_url: http://localhost/api/lti/security/openid-configuration?registration_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiZmI3M2JmYWItZjc0MS00YjMwLWIyNDUtNjA4OTJhY2I4MWExIiwiaW5pdGlhdGVkX2F0IjoiMjAyNC0wNy0xMVQwMDozMTozMiswMDowMCIsInVzZXJfaWQiOjE1MTY5LCJ1bmlmaWVkX3Rvb2xfaWQiOm51bGwsInJvb3RfYWNjb3VudF9nbG9iYWxfaWQiOjMxMDAwMDAwMDAwNjg4NywiZXhwIjoxNzIwNjYxNDkyfQ.C8vJSQHkfBwp6r2SKwVBtGV5AFSGxQMa-f_1xG2pQvg
+                token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiZmI3M2JmYWItZjc0MS00YjMwLWIyNDUtNjA4OTJhY2I4MWExIiwiaW5pdGlhdGVkX2F0IjoiMjAyNC0wNy0xMVQwMDozMTozMiswMDowMCIsInVzZXJfaWQiOjE1MTY5LCJ1bmlmaWVkX3Rvb2xfaWQiOm51bGwsInJvb3RfYWNjb3VudF9nbG9iYWxfaWQiOjMxMDAwMDAwMDAwNjg4NywiZXhwIjoxNzIwNjYxNDkyfQ.C8vJSQHkfBwp6r2SKwVBtGV5AFSGxQMa-f_1xG2pQvg
   "/api/lti/registrations":
     post:
       summary: create

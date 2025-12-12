@@ -28,7 +28,7 @@ module Factories
   def valid_pseudonym_attributes
     {
       unique_id: "#{SecureRandom.uuid}@example.com",
-      ***REMOVED***,
+      password: "password",
       password_confirmation: "password",
       persistence_token: "pt_#{SecureRandom.uuid}",
       perishable_token: "value for perishable_token",

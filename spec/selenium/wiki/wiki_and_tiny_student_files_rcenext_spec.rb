@@ -38,14 +38,14 @@ describe "Wiki pages and Tiny WYSIWYG editor Files", :ignore_js_errors do
           active_user: true,
           username: "student@example.com",
           name: "student@example.com",
-          ***REMOVED***
+          password: "asdfasdf"
         )
       @teacher =
         user_with_pseudonym(
           active_user: true,
           username: "teacher@example.com",
           name: "teacher@example.com",
-          ***REMOVED***
+          password: "asdfasdf"
         )
       @course.enroll_student(@student).accept
       @course.enroll_teacher(@teacher).accept
@@ -76,7 +76,7 @@ describe "Wiki pages and Tiny WYSIWYG editor Files", :ignore_js_errors do
           active_user: true,
           username: "student@example.com",
           name: "student@example.com",
-          ***REMOVED***
+          password: "asdfasdf"
         )
       @course.enroll_student(@student).accept
       user_session(@student)

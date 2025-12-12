@@ -27,7 +27,7 @@ describe LtiApiController, type: :request do
     course_with_student(active_all: true)
     @student = @user
     @course.enroll_teacher(user_with_pseudonym(active_all: true))
-    @tool = @course.context_external_tools.create!(shared_***REMOVED***, consumer_key: "test_key", name: "my analytics test tool", domain: "example.com")
+    @tool = @course.context_external_tools.create!(shared_secret: "test_secret", consumer_key: "test_key", name: "my analytics test tool", domain: "example.com")
     assignment_model(course: @course, name: "tool assignment", submission_types: "external_tool", points_possible: 20, grading_type: "points")
     tag = @assignment.build_external_tool_tag(url: "http://example.com/one")
     tag.content_type = "ContextExternalTool"

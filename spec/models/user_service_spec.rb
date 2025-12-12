@@ -46,7 +46,7 @@ describe UserService do
 
   it "is able to crypt a password" do
     expect(@user_service.crypted_password).to be_nil
-    @user_service.***REMOVED***
+    @user_service.password = "password"
     expect(@user_service.crypted_password).not_to be_nil
     expect(@user_service.decrypted_password).to eql("password")
   end
@@ -58,11 +58,11 @@ describe UserService do
       @registration = UserService.register(
         user: user_model,
         token: "some token",
-        ***REMOVED***,
+        secret: "some secret",
         service_user_id: @user.id,
         service_user_name: @user.name,
         service_user_url: "some url",
-        ***REMOVED***
+        password: "password"
       )
       expect(@registration.token).to eql("some token")
       expect(@registration.secret).to eql("some secret")
@@ -95,11 +95,11 @@ describe UserService do
         @registration = UserService.register(
           user:,
           token: "some token",
-          ***REMOVED***,
+          secret: "some secret",
           service_user_id: user.id,
           service_user_name: user.name,
           service_user_url: "some url",
-          ***REMOVED***
+          password: "password"
         )
 
         expect(@registration.token).to eql("some token")
@@ -141,7 +141,7 @@ describe UserService do
       s = UserService.new
       s.password = "asdf"
       expect(s.decrypted_password).to eql("asdf")
-      s.***REMOVED***waegawe-,v-3o7fya23oya2o3"
+      s.password = "2t87aot72gho8a37gh4g[awg'waegawe-,v-3o7fya23oya2o3"
       expect(s.decrypted_password).to eql("2t87aot72gho8a37gh4g[awg'waegawe-,v-3o7fya23oya2o3")
     end
   end

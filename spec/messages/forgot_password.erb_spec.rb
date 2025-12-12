@@ -24,7 +24,7 @@ describe "forgot_password" do
   before :once do
     user_factory
     @pseudonym = @user.pseudonyms.create!(unique_id: "unique@example.com",
-                                          ***REMOVED***,
+                                          password: "password",
                                           password_confirmation: "password")
     @object = communication_channel(@user, { username: "bob@example.com" })
   end

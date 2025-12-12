@@ -48,7 +48,7 @@ describe "dashboard" do
 
     it "displays assignment to grade in to do list for a teacher", priority: "1" do
       assignment = assignment_model({ submission_types: "online_text_entry", course: @course })
-      student = user_with_pseudonym(active_user: true, username: "student@example.com", ***REMOVED***)
+      student = user_with_pseudonym(active_user: true, username: "student@example.com", password: "qwertyuiop")
       @course.enroll_user(student, "StudentEnrollment", enrollment_state: "active")
       assignment.reload
       assignment.submit_homework(student, { submission_type: "online_text_entry", body: "ABC" })
@@ -64,7 +64,7 @@ describe "dashboard" do
     context "render both to do lists" do
       before do
         @assignment = assignment_model({ submission_types: "online_text_entry", course: @course })
-        student = user_with_pseudonym(active_user: true, username: "student@example.com", ***REMOVED***)
+        student = user_with_pseudonym(active_user: true, username: "student@example.com", password: "qwertyuiop")
         @course.enroll_user(student, "StudentEnrollment", enrollment_state: "active")
         @assignment.reload
         @assignment.submit_homework(student, { submission_type: "online_text_entry", body: "ABC" })
@@ -91,8 +91,8 @@ describe "dashboard" do
 
     it "is able to ignore an assignment until the next submission", priority: "1" do
       assignment = assignment_model({ submission_types: "online_text_entry", course: @course })
-      student = user_with_pseudonym(active_user: true, username: "student@example.com", ***REMOVED***)
-      student2 = user_with_pseudonym(active_user: true, username: "student2@example.com", ***REMOVED***)
+      student = user_with_pseudonym(active_user: true, username: "student@example.com", password: "qwertyuiop")
+      student2 = user_with_pseudonym(active_user: true, username: "student2@example.com", password: "qwertyuiop")
       @course.enroll_user(student, "StudentEnrollment", enrollment_state: "active")
       @course.enroll_user(student2, "StudentEnrollment", enrollment_state: "active")
       assignment.reload
@@ -258,7 +258,7 @@ describe "dashboard" do
     it "does not display assignment to grade in to do list for a designer", priority: "1" do
       course_with_designer_logged_in(active_all: true)
       assignment = assignment_model({ submission_types: "online_text_entry", course: @course })
-      student = user_with_pseudonym(active_user: true, username: "student@example.com", ***REMOVED***)
+      student = user_with_pseudonym(active_user: true, username: "student@example.com", password: "qwertyuiop")
       @course.enroll_user(student, "StudentEnrollment", enrollment_state: "active")
       assignment.reload
       assignment.submit_homework(student, { submission_type: "online_text_entry", body: "ABC" })
@@ -293,7 +293,7 @@ describe "dashboard" do
     context "todo link" do
       before do
         assignment = assignment_model({ submission_types: "online_text_entry", course: @course })
-        student = user_with_pseudonym(active_user: true, username: "student@example.com", ***REMOVED***)
+        student = user_with_pseudonym(active_user: true, username: "student@example.com", password: "qwertyuiop")
         @course.enroll_user(student, "StudentEnrollment", enrollment_state: "active")
         assignment.reload
         assignment.submit_homework(student, { submission_type: "online_text_entry", body: "ABC" })
